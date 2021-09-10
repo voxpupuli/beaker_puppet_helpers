@@ -1,0 +1,14 @@
+{
+  "name": "puppet-dummy",
+  "version": "1.0.0",
+  "author": "puppet",
+  "summary": "A dummy module",
+  "description": "This module is used in acceptance tests to verify the beaker helper works",
+  "license": "Apache-2.0",
+  "source": "https://github.com/voxpupuli/beaker_puppet_helpers",
+  "project_page": "https://github.com/voxpupuli/beaker_puppet_helpers",
+  "project_page": "https://github.com/voxpupuli/beaker_puppet_helpers/issues",
+  "dependencies": [
+		{"name": "puppetlabs/stdlib"}
+	]
+}
