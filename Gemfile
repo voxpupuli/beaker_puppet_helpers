@@ -8,7 +8,12 @@ gem 'rubocop'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
 
-gem 'beaker-vagrant'
+case ENV['BEAKER_HYPERVISOR']
+when 'docker'
+  gem 'beaker-docker'
+when 'vagrant', 'vagrant_libvirt'
+  gem 'beaker-vagrant'
+end
 
 group :release do
   gem 'github_changelog_generator', require: false
