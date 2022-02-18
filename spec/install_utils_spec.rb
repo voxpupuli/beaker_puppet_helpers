@@ -66,4 +66,23 @@ describe BeakerPuppetHelpers::InstallUtils do
       end
     end
   end
+
+  describe '.wget_on' do
+    let(:host) { double('Beaker::Host') }
+    let(:url) { 'https://apt.puppet.com/puppet-release-bullseye.deb' }
+
+    it do
+      expect(Beaker::Command).to receive(:new).with("mktemp -t 'puppet-release-bullseye-XXXXXX.deb'").and_return('MKTEMP')
+      result = Beaker::Result.new(host, 'MKTEMP')
+      result.stdout = "/tmp/puppet-release-bullseye-ABCDEF.deb\n"
+      expect(host).to receive(:exec).with('MKTEMP').and_return(result)
+
+      expect(Beaker::Command).to receive(:new).with("wget -O '/tmp/puppet-release-bullseye-ABCDEF.deb' 'https://apt.puppet.com/puppet-release-bullseye.deb'").and_return('WGET')
+      expect(host).to receive(:exec).with('WGET')
+
+      expect(host).to receive(:rm_rf).with('/tmp/puppet-release-bullseye-ABCDEF.deb')
+
+      expect { |b| described_class.wget_on(host, url, &b) }.to yield_with_args('/tmp/puppet-release-bullseye-ABCDEF.deb')
+    end
+  end
 end
