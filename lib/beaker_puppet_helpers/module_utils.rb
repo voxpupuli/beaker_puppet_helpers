@@ -44,7 +44,7 @@ module BeakerPuppetHelpers
       source_path = builder.build
       begin
         block_on hosts do |host|
-          target_file = host.tmpfile('puppet_module')
+          target_file = host.tmpfile('puppet_module', '.tar.gz')
           begin
             host.do_scp_to(source_path, target_file, {})
             install_puppet_module_via_pmt_on(host, target_file)
