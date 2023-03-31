@@ -1,5 +1,8 @@
-AllCops:
-  NewCops: enable
+---
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  beaker: rubocop.yml
 
 Layout/LineLength:
   Enabled: false
@@ -17,8 +20,4 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/PerceivedComplexity:
-  Enabled: false
-
-# It's released through Vox Pupuli's account and that has no MFA
-Gemspec/RequireMFA:
   Enabled: false

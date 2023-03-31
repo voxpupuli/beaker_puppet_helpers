@@ -52,6 +52,7 @@ describe BeakerPuppetHelpers::InstallUtils do
 
       context 'on Debian 11' do
         let(:platform) { 'debian-11-x86_64' }
+
         before { allow(host).to receive(:[]).with('platform').and_return(packaging_platform) }
 
         it 'installs from the correct url and runs apt-get update' do

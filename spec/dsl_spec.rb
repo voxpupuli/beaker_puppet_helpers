@@ -108,7 +108,7 @@ describe ClassMixedWithDSLHelpers do
       subject.apply_manifest_on(
         agent,
         'class { "boo": }',
-        expect_changes: true
+        expect_changes: true,
       )
     end
 

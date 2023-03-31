@@ -10,15 +10,18 @@ Gem::Specification.new do |s|
   s.description = 'For use for the Beaker acceptance testing tool'
   s.license     = 'Apache2'
 
-  s.required_ruby_version = '>= 2.5', '< 4'
+  s.required_ruby_version = '>= 2.7', '< 4'
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ['lib']
 
   # Testing dependencies
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'rubocop', '~> 1.48.1'
+  s.add_development_dependency 'rubocop-performance'
+  s.add_development_dependency 'rubocop-rake'
+  s.add_development_dependency 'rubocop-rspec'
 
   # Documentation dependencies
   s.add_development_dependency 'redcarpet'

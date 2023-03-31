@@ -3,9 +3,14 @@
 begin
   require 'rubocop/rake_task'
 rescue LoadError
-  # No Rubocop
+  # RuboCop is an optional group
 else
-  RuboCop::RakeTask.new
+  RuboCop::RakeTask.new(:rubocop) do |task|
+    # These make the rubocop experience maybe slightly less terrible
+    task.options = ['--display-cop-names', '--display-style-guide', '--extra-details']
+    # Use Rubocop's Github Actions formatter if possible
+    task.formatters << 'github' if ENV['GITHUB_ACTIONS'] == 'true'
+  end
 end
 
 begin
@@ -37,7 +42,7 @@ DESC
 task :acceptance do
   hosts = {
     aio: %w[centos7 centos8 debian10 debian11],
-    foss: %w[debian10 debian11]
+    foss: %w[debian10 debian11],
   }
   default_hosts = hosts.map { |type, h| h.map { |host| "#{host}-64{type=#{type}}" }.join('-') }.join('-')
   hosts = ENV['BEAKER_HOSTS'] || default_hosts
@@ -50,7 +55,7 @@ task :acceptance do
     "--hosts=#{hosts}",
     "--tests=#{tests}",
     "--log-level=#{log_level}",
-    "--preserve-hosts=#{preserve_hosts}"
+    "--preserve-hosts=#{preserve_hosts}",
   ] + ENV['BEAKER_OPTIONS'].to_s.split
 
   sh('beaker', *args.compact)

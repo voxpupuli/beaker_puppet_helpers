@@ -4,11 +4,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 gemspec
 
-gem 'rubocop', require: false
-gem 'rubocop-rake', require: false
-gem 'rubocop-rspec', require: false
-
-case ENV['BEAKER_HYPERVISOR']
+case ENV.fetch('BEAKER_HYPERVISOR', nil)
 when 'docker'
   gem 'beaker-docker'
 when 'vagrant', 'vagrant_libvirt'
