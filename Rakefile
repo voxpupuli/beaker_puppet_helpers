@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 begin
-  require 'rubocop/rake_task'
+  require 'voxpupuli/rubocop/rake'
 rescue LoadError
-  # No Rubocop
-else
-  RuboCop::RakeTask.new
+  # the voxpupuli-rubocop gem is optional
 end
 
 begin
@@ -37,7 +35,7 @@ DESC
 task :acceptance do
   hosts = {
     aio: %w[centos7 centos8 debian10 debian11],
-    foss: %w[debian10 debian11]
+    foss: %w[debian10 debian11],
   }
   default_hosts = hosts.map { |type, h| h.map { |host| "#{host}-64{type=#{type}}" }.join('-') }.join('-')
   hosts = ENV['BEAKER_HOSTS'] || default_hosts
@@ -50,7 +48,7 @@ task :acceptance do
     "--hosts=#{hosts}",
     "--tests=#{tests}",
     "--log-level=#{log_level}",
-    "--preserve-hosts=#{preserve_hosts}"
+    "--preserve-hosts=#{preserve_hosts}",
   ] + ENV['BEAKER_OPTIONS'].to_s.split
 
   sh('beaker', *args.compact)

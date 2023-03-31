@@ -12,14 +12,12 @@ group :development do
   gem 'yard'
 end
 
-group :test do
-  gem 'rspec', '~> 3.0'
+group :rubocop do
+  gem 'voxpupuli-rubocop', '~> 1.2'
 end
 
-group :rubocop do
-  gem 'rubocop', require: false
-  gem 'rubocop-rake', require: false
-  gem 'rubocop-rspec', require: false
+group :test do
+  gem 'rspec', '~> 3.0'
 end
 
 case ENV.fetch('BEAKER_HYPERVISOR', nil)

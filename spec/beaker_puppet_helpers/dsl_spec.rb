@@ -110,7 +110,7 @@ describe BeakerPuppetHelpers::DSL do
       dsl.apply_manifest_on(
         agent,
         'class { "boo": }',
-        expect_changes: true
+        expect_changes: true,
       )
     end
 

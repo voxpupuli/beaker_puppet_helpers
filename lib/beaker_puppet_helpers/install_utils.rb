@@ -9,12 +9,12 @@ module BeakerPuppetHelpers
     REPOS = {
       release: {
         apt: 'https://apt.puppet.com',
-        yum: 'https://yum.puppet.com'
+        yum: 'https://yum.puppet.com',
       },
       nightly: {
         apt: 'https://nightlies.puppet.com/apt',
-        yum: 'https://nightlies.puppet.com/yum'
-      }
+        yum: 'https://nightlies.puppet.com/yum',
+      },
     }.freeze
 
     # Install official Puppet release repository configuration on host(s).
