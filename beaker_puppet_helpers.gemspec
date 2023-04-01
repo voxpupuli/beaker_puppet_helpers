@@ -15,14 +15,6 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
 
-  # Testing dependencies
-  s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'rspec', '~> 3.0'
-
-  # Documentation dependencies
-  s.add_development_dependency 'redcarpet'
-  s.add_development_dependency 'yard'
-
   # Run time dependencies
   s.add_runtime_dependency 'beaker', '~> 4.1'
   s.add_runtime_dependency 'puppet-modulebuilder', '~> 0.3'
