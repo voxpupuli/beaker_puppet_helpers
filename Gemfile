@@ -7,6 +7,7 @@ gemspec
 gem 'rake', '~> 13.0', groups: %i[development test release]
 
 group :development do
+  gem 'rdoc'
   gem 'redcarpet'
   gem 'yard'
 end

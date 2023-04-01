@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A collection of helpers to make Puppet usage easier with Beaker
 module BeakerPuppetHelpers
   autoload :DSL, File.join(__dir__, 'beaker_puppet_helpers', 'dsl.rb')
   autoload :InstallUtils, File.join(__dir__, 'beaker_puppet_helpers', 'install_utils.rb')
