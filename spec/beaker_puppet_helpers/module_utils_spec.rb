@@ -11,7 +11,9 @@ class ClassMixedWithDSLInstallUtils
   end
 end
 
-describe ClassMixedWithDSLInstallUtils do
+describe BeakerPuppetHelpers::ModuleUtils do
+  subject { ClassMixedWithDSLInstallUtils.new }
+
   let(:host) { double('Beaker::Host') }
 
   describe '#install_puppet_module_via_pmt_on' do
