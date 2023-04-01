@@ -10,7 +10,7 @@ describe BeakerPuppetHelpers::InstallUtils do
     before { allow(host).to receive(:[]).with('packaging_platform').and_return(packaging_platform) }
 
     context 'with default options' do
-      subject { described_class.install_puppet_release_repo_on(host) }
+      subject(:install_puppet_release_repo_on) { described_class.install_puppet_release_repo_on(host) }
 
       context 'with EL 7 platform' do
         let(:platform) { 'el-7-x86_64' }
@@ -18,7 +18,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         it 'installs from the correct url' do
           expect(host).to receive(:install_package).with('https://yum.puppet.com/puppet-release-el-7.noarch.rpm')
 
-          subject
+          install_puppet_release_repo_on
         end
       end
 
@@ -28,7 +28,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         it 'installs from the correct url' do
           expect(host).to receive(:install_package).with('https://yum.puppet.com/puppet-release-fedora-34.noarch.rpm')
 
-          subject
+          install_puppet_release_repo_on
         end
       end
 
@@ -46,7 +46,7 @@ describe BeakerPuppetHelpers::InstallUtils do
           expect(Beaker::Command).to receive(:new).with("rpm --import 'puppet-20250406.gpg'").and_return("rpm --import 'puppet-20250406.gpg'").once
           expect(host).to receive(:exec).with("rpm --import 'puppet-20250406.gpg'").once
 
-          subject
+          install_puppet_release_repo_on
         end
       end
 
@@ -61,7 +61,7 @@ describe BeakerPuppetHelpers::InstallUtils do
           expect(host).to receive(:exec).with('apt-get update')
           expect(host).to receive(:add_env_var).with('PATH', '/opt/puppetlabs/bin')
 
-          subject
+          install_puppet_release_repo_on
         end
       end
     end

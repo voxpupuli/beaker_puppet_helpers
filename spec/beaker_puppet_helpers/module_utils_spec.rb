@@ -12,7 +12,7 @@ class ClassMixedWithDSLInstallUtils
 end
 
 describe BeakerPuppetHelpers::ModuleUtils do
-  subject { ClassMixedWithDSLInstallUtils.new }
+  subject(:dsl) { ClassMixedWithDSLInstallUtils.new }
 
   let(:host) { double('Beaker::Host') }
 
@@ -25,30 +25,30 @@ describe BeakerPuppetHelpers::ModuleUtils do
 
     it 'installs module via puppet module tool' do
       expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], {}).once
-      expect(subject).to receive(:on).with(host, anything).once
+      expect(dsl).to receive(:on).with(host, anything).once
 
-      subject.install_puppet_module_via_pmt_on(host, 'test')
+      dsl.install_puppet_module_via_pmt_on(host, 'test')
     end
 
     it 'accepts the version parameter' do
       expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { version: '1.2.3' }).once
-      expect(subject).to receive(:on).with(host, anything).once
+      expect(dsl).to receive(:on).with(host, anything).once
 
-      subject.install_puppet_module_via_pmt_on(host, 'test', '1.2.3')
+      dsl.install_puppet_module_via_pmt_on(host, 'test', '1.2.3')
     end
 
     it 'accepts the module_repository parameter' do
       expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { module_repository: 'http://forge.example.com' }).once
-      expect(subject).to receive(:on).with(host, anything).once
+      expect(dsl).to receive(:on).with(host, anything).once
 
-      subject.install_puppet_module_via_pmt_on(host, 'test', nil, 'http://forge.example.com')
+      dsl.install_puppet_module_via_pmt_on(host, 'test', nil, 'http://forge.example.com')
     end
 
     it 'accepts the version and module_repository parameters' do
       expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { version: '1.2.3', module_repository: 'http://forge.example.com' }).once
-      expect(subject).to receive(:on).with(host, anything).once
+      expect(dsl).to receive(:on).with(host, anything).once
 
-      subject.install_puppet_module_via_pmt_on(host, 'test', '1.2.3', 'http://forge.example.com')
+      dsl.install_puppet_module_via_pmt_on(host, 'test', '1.2.3', 'http://forge.example.com')
     end
 
     context 'with host with trace option' do
@@ -56,9 +56,9 @@ describe BeakerPuppetHelpers::ModuleUtils do
 
       it 'takes the trace option and passes it down correctly' do
         expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { trace: nil }).once
-        expect(subject).to receive(:on).with(host, anything).once
+        expect(dsl).to receive(:on).with(host, anything).once
 
-        subject.install_puppet_module_via_pmt_on(host, 'test')
+        dsl.install_puppet_module_via_pmt_on(host, 'test')
       end
     end
 
@@ -67,16 +67,16 @@ describe BeakerPuppetHelpers::ModuleUtils do
 
       it 'passes it down' do
         expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { module_repository: 'http://forge.example.com' }).once
-        expect(subject).to receive(:on).with(host, anything).once
+        expect(dsl).to receive(:on).with(host, anything).once
 
-        subject.install_puppet_module_via_pmt_on(host, 'test')
+        dsl.install_puppet_module_via_pmt_on(host, 'test')
       end
 
       it 'argument overrides host defaults' do
         expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { module_repository: 'http://other.example.com' }).once
-        expect(subject).to receive(:on).with(host, anything).once
+        expect(dsl).to receive(:on).with(host, anything).once
 
-        subject.install_puppet_module_via_pmt_on(host, 'test', nil, 'http://other.example.com')
+        dsl.install_puppet_module_via_pmt_on(host, 'test', nil, 'http://other.example.com')
       end
     end
   end
@@ -92,10 +92,10 @@ describe BeakerPuppetHelpers::ModuleUtils do
 
       expect(host).to receive(:tmpfile).with('puppet_module').and_return('temp')
       expect(host).to receive(:do_scp_to).with('/path/to/tarball', 'temp', {})
-      expect(subject).to receive(:install_puppet_module_via_pmt_on).with(host, 'temp')
+      expect(dsl).to receive(:install_puppet_module_via_pmt_on).with(host, 'temp')
       expect(host).to receive(:rm_rf).with('temp')
 
-      subject.install_local_module_on(host)
+      dsl.install_local_module_on(host)
     end
   end
 end
