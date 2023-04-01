@@ -11,7 +11,9 @@ class ClassMixedWithDSLHelpers
   end
 end
 
-describe ClassMixedWithDSLHelpers do
+describe BeakerPuppetHelpers::DSL do
+  subject { ClassMixedWithDSLHelpers.new }
+
   let(:master) { double('Beaker::Host') }
   let(:agent)  { double('Beaker::Host') }
   let(:hosts)  { [master, agent] }
