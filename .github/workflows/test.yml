@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Rubocop
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
@@ -32,7 +32,7 @@ jobs:
           - "3.0"
     name: Ruby ${{ matrix.ruby }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
