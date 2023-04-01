@@ -49,7 +49,7 @@ describe ClassMixedWithDSLInstallUtils do
       subject.install_puppet_module_via_pmt_on(host, 'test', '1.2.3', 'http://forge.example.com')
     end
 
-    context 'host with trace option' do
+    context 'with host with trace option' do
       let(:default_module_install_opts) { { trace: nil } }
 
       it 'takes the trace option and passes it down correctly' do
@@ -60,7 +60,7 @@ describe ClassMixedWithDSLInstallUtils do
       end
     end
 
-    context 'host with module_repository set' do
+    context 'with host with module_repository set' do
       let(:default_module_install_opts) { { module_repository: 'http://forge.example.com' } }
 
       it 'passes it down' do

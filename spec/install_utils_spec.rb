@@ -9,10 +9,10 @@ describe BeakerPuppetHelpers::InstallUtils do
 
     before { allow(host).to receive(:[]).with('packaging_platform').and_return(packaging_platform) }
 
-    context 'default options' do
+    context 'with default options' do
       subject { described_class.install_puppet_release_repo_on(host) }
 
-      context 'on EL 7' do
+      context 'with EL 7 platform' do
         let(:platform) { 'el-7-x86_64' }
 
         it 'installs from the correct url' do
@@ -22,7 +22,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         end
       end
 
-      context 'on Fedora 34' do
+      context 'with Fedora 34 platform' do
         let(:platform) { 'fedora-34-x86_64' }
 
         it 'installs from the correct url' do
@@ -32,7 +32,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         end
       end
 
-      context 'on SLES 15' do
+      context 'with SLES 15 platform' do
         let(:platform) { 'sles-15-x86_64' }
 
         it 'installs from the correct url and calls rpm --import' do
@@ -50,7 +50,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         end
       end
 
-      context 'on Debian 11' do
+      context 'with Debian 11 platform' do
         let(:platform) { 'debian-11-x86_64' }
         before { allow(host).to receive(:[]).with('platform').and_return(packaging_platform) }
 
