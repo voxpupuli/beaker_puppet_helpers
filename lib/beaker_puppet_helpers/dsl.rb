@@ -200,7 +200,7 @@ module BeakerPuppetHelpers
       raise(ArgumentError, "fact_on's `name` option must be a String. You provided a #{name.class}: '#{name}'") unless name.is_a?(String)
 
       if opts.is_a?(Hash)
-        opts.merge!({ json: nil })
+        opts['json'] = nil
       else
         opts << ' --json'
       end
