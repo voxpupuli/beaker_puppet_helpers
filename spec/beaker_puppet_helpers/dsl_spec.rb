@@ -48,7 +48,7 @@ describe BeakerPuppetHelpers::DSL do
       expect(result).to be_an(Array)
     end
 
-    it 'operates on an array of hosts' do
+    it 'operates on an array of hosts in parallel' do
       InParallel::InParallelExecutor.logger = dsl.logger
       # This will only get hit if forking processes is supported and at least 2 items are being submitted to run in parallel
       # expect( InParallel::InParallelExecutor ).to receive(:_execute_in_parallel).with(any_args).and_call_original.exactly(2).times
@@ -122,13 +122,13 @@ describe BeakerPuppetHelpers::DSL do
       dsl.apply_manifest_on(agent, 'class { "boo": }', expect_failures: true)
     end
 
-    it 'enforces exit codes through :expect_failures' do
+    it 'enforces exit codes through :expect_failures and catch_failures' do
       expect do
         dsl.apply_manifest_on(agent, 'class { "boo": }', expect_failures: true, catch_failures: true)
       end.to raise_error(ArgumentError, /catch_failures.+expect_failures/)
     end
 
-    it 'enforces added exit codes through :expect_failures' do
+    it 'enforces merges exit codes from :expect_failures and acceptable_exit_codes' do
       expect(dsl).to receive(:create_remote_file).and_return(true)
       expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
 
