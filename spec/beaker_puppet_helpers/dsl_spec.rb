@@ -73,9 +73,9 @@ describe BeakerPuppetHelpers::DSL do
       the_hosts.each do |host|
         allow(dsl).to receive(:on).with(host, 'puppet_command', acceptable_exit_codes: [0])
       end
-      expect(dsl).to receive(:block_on).with(anything, run_in_parallel: true)
+      expect(dsl).to receive(:block_on).with(anything, { run_in_parallel: true })
 
-      dsl.apply_manifest_on(the_hosts, 'include foobar', { run_in_parallel: true })
+      dsl.apply_manifest_on(the_hosts, 'include foobar', run_in_parallel: true)
     end
 
     it 'adds acceptable exit codes with :catch_failures' do
