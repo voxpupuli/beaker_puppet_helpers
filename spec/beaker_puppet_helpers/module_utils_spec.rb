@@ -14,7 +14,7 @@ end
 describe BeakerPuppetHelpers::ModuleUtils do
   subject(:dsl) { ClassMixedWithDSLInstallUtils.new }
 
-  let(:host) { double('Beaker::Host') }
+  let(:host) { instance_double(Beaker::Host) }
 
   describe '#install_puppet_module_via_pmt_on' do
     let(:default_module_install_opts) { nil }
@@ -82,7 +82,7 @@ describe BeakerPuppetHelpers::ModuleUtils do
   end
 
   describe '#install_local_module_on' do
-    let(:builder) { double('Puppet::Modulebuilder::Builder') }
+    let(:builder) { instance_double(Puppet::Modulebuilder::Builder) }
 
     it 'builds and copies the module' do
       expect(File).to receive(:realpath).with('.').and_return('/path/to/module')
