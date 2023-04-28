@@ -171,7 +171,7 @@ module BeakerPuppetHelpers
         begin
           create_remote_file(host, file_path, "#{manifest}\n")
 
-          on host, Beaker::PuppetCommand.new('apply', file_path, puppet_apply_opts), on_options, &block
+          on(host, Beaker::PuppetCommand.new('apply', file_path, puppet_apply_opts), **on_options, &block)
         ensure
           host.rm_rf(file_path)
         end
