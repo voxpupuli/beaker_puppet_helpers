@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe BeakerPuppetHelpers::InstallUtils do
   describe '.install_puppet_release_repo_on' do
-    let(:host) { double('Beaker::Host') }
+    let(:host) { instance_double(Beaker::Host) }
     let(:packaging_platform) { Beaker::Platform.new(platform) }
 
     before { allow(host).to receive(:[]).with('packaging_platform').and_return(packaging_platform) }

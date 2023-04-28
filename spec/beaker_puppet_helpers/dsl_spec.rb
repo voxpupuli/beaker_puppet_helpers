@@ -14,8 +14,8 @@ end
 describe BeakerPuppetHelpers::DSL do
   subject(:dsl) { ClassMixedWithDSLHelpers.new }
 
-  let(:master) { double('Beaker::Host') }
-  let(:agent)  { double('Beaker::Host') }
+  let(:master) { instance_double(Beaker::Host) }
+  let(:agent)  { instance_double(Beaker::Host) }
   let(:hosts)  { [master, agent] }
 
   describe '#apply_manifest_on' do
@@ -179,7 +179,7 @@ describe BeakerPuppetHelpers::DSL do
 
   describe '#fact_on' do
     it 'retrieves a fact on a single host' do
-      result = double('Beaker::Result', stdout: '{"osfamily": "family"}')
+      result = instance_double(Beaker::Result, stdout: '{"osfamily": "family"}')
       expect(dsl).to receive(:on).and_return(result)
 
       expect(dsl.fact_on('host', 'osfamily')).to eq('family')
@@ -188,21 +188,21 @@ describe BeakerPuppetHelpers::DSL do
     it 'converts each element to a structured fact when it receives an array of results from #on' do
       times = hosts.length
 
-      result = double('Beaker::Result', stdout: '{"os": {"name":"name", "family": "family"}}')
+      result = instance_double(Beaker::Result, stdout: '{"os": {"name":"name", "family": "family"}}')
       allow(dsl).to receive(:on).and_return([result] * times)
 
       expect(dsl.fact_on(hosts, 'os')).to eq([{ 'name' => 'name', 'family' => 'family' }] * times)
     end
 
     it 'returns a single result for single host' do
-      result = double('Beaker::Result', stdout: '{"osfamily": "family"}')
+      result = instance_double(Beaker::Result, stdout: '{"osfamily": "family"}')
       allow(dsl).to receive(:on).and_return(result)
 
       expect(dsl.fact_on('host', 'osfamily')).to eq('family')
     end
 
     it 'preserves data types' do
-      result = double('Beaker::Result', stdout: '{"identity": { "uid": 0, "user": "root", "privileged": true }}')
+      result = instance_double(Beaker::Result, stdout: '{"identity": { "uid": 0, "user": "root", "privileged": true }}')
       allow(dsl).to receive(:on).and_return(result)
 
       structured_fact = dsl.fact_on('host', 'identity')
