@@ -205,7 +205,7 @@ module BeakerPuppetHelpers
         opts << ' --json'
       end
 
-      result = on host, Beaker::Command.new('facter', "\"#{name}\"", opts)
+      result = on host, Beaker::Command.new('facter', [name], opts)
       if result.is_a?(Array)
         result.map { |res| JSON.parse(res.stdout)[name] }
       else
