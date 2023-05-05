@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/voxpupuli/beaker_puppet_helpers'
   s.summary     = "Beaker's Puppet DSL Extension Helpers"
   s.description = 'For use for the Beaker acceptance testing tool'
-  s.license     = 'Apache2'
+  s.license     = 'Apache-2.0'
 
   s.required_ruby_version = '>= 2.7', '< 4'
 
