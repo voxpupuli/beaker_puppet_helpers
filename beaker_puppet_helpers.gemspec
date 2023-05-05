@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
 
   # Run time dependencies
   s.add_runtime_dependency 'beaker', '>= 4', '< 6'
-  s.add_runtime_dependency 'puppet-modulebuilder', '~> 0.3'
+  s.add_runtime_dependency 'puppet-modulebuilder', '~> 0.3', '< 2'
 end
