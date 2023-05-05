@@ -39,7 +39,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Verify gem builds
-        run: bundle exec gem build *.gemspec
+        run: gem build --strict --verbose *.gemspec
       - name: Run unit tests
         run: bundle exec rake spec
       - name: Run acceptance tests
