@@ -18,7 +18,7 @@ jobs:
           ruby-version: "3.0"
           bundler-cache: true
       - name: Rubocop
-        run: bundle exec rubocop --format github
+        run: bundle exec rake rubocop
 
   build:
     runs-on: ubuntu-20.04

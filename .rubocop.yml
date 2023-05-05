@@ -1,24 +1,14 @@
-AllCops:
-  NewCops: enable
+---
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  voxpupuli-rubocop: rubocop.yml
 
 Layout/LineLength:
   Enabled: false
 
-Metrics/AbcSize:
+RSpec/SubjectStub:
   Enabled: false
 
-Metrics/BlockLength:
-  Enabled: false
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/PerceivedComplexity:
-  Enabled: false
-
-# It's released through Vox Pupuli's account and that has no MFA
-Gemspec/RequireMFA:
+RSpec/StubbedMock:
   Enabled: false
