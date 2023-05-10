@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.0.1) (2023-05-09)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.0.0...1.0.1)
+
+**Fixed bugs:**
+
+- puppet-modulebuilder: Allow 1.x [\#25](https://github.com/voxpupuli/beaker_puppet_helpers/pull/25) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [1.0.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.0.0) (2023-05-05)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/5cc9e2e0e2a6a3541502bb1aae961071a8b96157...1.0.0)
