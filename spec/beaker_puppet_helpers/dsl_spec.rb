@@ -166,6 +166,14 @@ describe BeakerPuppetHelpers::DSL do
 
       dsl.apply_manifest_on(agent, 'class { "boo": }', debug: true)
     end
+
+    it 'can set the --show_diff flag' do
+      expect(dsl).to receive(:create_remote_file).and_return(true)
+      expect(Beaker::PuppetCommand).to receive(:new).with('apply', anything, include(show_diff: nil)).and_return('puppet_command')
+      expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+
+      dsl.apply_manifest_on(agent, 'class { "boo": }', show_diff: true)
+    end
   end
 
   describe '#apply_manifest' do
