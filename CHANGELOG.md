@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.0.1) (2023-05-09)
+## [1.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.1.0) (2023-06-01)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.0.1...1.1.0)
+
+**Implemented enhancements:**
+
+- Add support for `--show_diff` [\#27](https://github.com/voxpupuli/beaker_puppet_helpers/pull/27) ([smortex](https://github.com/smortex))
+
+## [1.0.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.0.1) (2023-05-10)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.0.0...1.0.1)
 
