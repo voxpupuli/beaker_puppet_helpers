@@ -89,10 +89,15 @@ module BeakerPuppetHelpers
     #
     # @option opts [String]   :hiera_config The path of the hiera.yaml configuration.
     #
-    # @option opts [String]   :debug (false) If this option exists,
+    # @option opts [Boolean]  :debug (false) If this option exists,
     #                         the "--debug" command line parameter
     #                         will be passed to the 'puppet apply' command.
-    # @option opts [Boolean] :run_in_parallel Whether to run on each host in parallel.
+    #
+    # @option opts [Boolean]  :run_in_parallel Whether to run on each host in parallel.
+    #
+    # @option opts [Boolean]  :show_diff (false) If this option exists,
+    #                         the "--show_diff=true" command line parameter
+    #                         will be passed to the 'puppet apply' command.
     #
     # @param [Block] block This method will yield to a block of code passed
     #                      by the caller; this can be used for additional
@@ -118,6 +123,7 @@ module BeakerPuppetHelpers
         puppet_apply_opts[:modulepath] = opts[:modulepath] if opts[:modulepath]
         puppet_apply_opts[:hiera_config] = opts[:hiera_config] if opts[:hiera_config]
         puppet_apply_opts[:noop] = nil if opts[:noop]
+        puppet_apply_opts[:show_diff] = nil if opts[:show_diff]
 
         # From puppet help:
         # "... an exit code of '2' means there were changes, an exit code of
