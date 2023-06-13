@@ -1,7 +1,7 @@
 # Beaker Puppet Helpers
 
 [![License](https://img.shields.io/github/license/voxpupuli/beaker_puppet_helpers.svg)](https://github.com/voxpupuli/beaker_puppet_helpers/blob/master/LICENSE)
-[![Test](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/ci.yml/badge.svg)](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/ci.yml)
+[![Test](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/test.yml/badge.svg)](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/test.yml)
 [![Release](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/beaker_puppet_helpers/actions/workflows/release.yml)
 [![RubyGem Version](https://img.shields.io/gem/v/beaker_puppet_helpers.svg)](https://rubygems.org/gems/beaker_puppet_helpers)
 [![RubyGem Downloads](https://img.shields.io/gem/dt/beaker_puppet_helpers.svg)](https://rubygems.org/gems/beaker_puppet_helpers)
