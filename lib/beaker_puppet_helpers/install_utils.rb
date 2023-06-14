@@ -64,6 +64,8 @@ module BeakerPuppetHelpers
 
         # On Debian we can't count on /etc/profile.d
         host.add_env_var('PATH', '/opt/puppetlabs/bin')
+      when 'archlinux'
+        # Do nothing
       else
         raise "No repository installation step for #{variant} yet..."
       end
