@@ -78,7 +78,7 @@ module BeakerPuppetHelpers
     # @return [String] The Puppet package name
     def self.puppet_package_name(host, prefer_aio: true)
       case host['packaging_platform'].split('-', 3).first
-      when /el-|fedora|sles|cisco_|debian|ubuntu/
+      when /el|fedora|sles|cisco_|debian|ubuntu/
         prefer_aio ? 'puppet-agent' : 'puppet'
       when /freebsd/
         'sysutils/puppet'
