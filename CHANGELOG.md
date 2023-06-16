@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.1.1) (2023-06-16)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.1.0...1.1.1)
+
+**Fixed bugs:**
+
+- fix typo in EL package selection [\#32](https://github.com/voxpupuli/beaker_puppet_helpers/pull/32) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- CI: Run on PRs+merges to master [\#33](https://github.com/voxpupuli/beaker_puppet_helpers/pull/33) ([bastelfreak](https://github.com/bastelfreak))
+- README.md: Correct link to CI jobs [\#30](https://github.com/voxpupuli/beaker_puppet_helpers/pull/30) ([bastelfreak](https://github.com/bastelfreak))
+- GCG: Add faraday-retry dep [\#29](https://github.com/voxpupuli/beaker_puppet_helpers/pull/29) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [1.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.1.0) (2023-06-01)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.0.1...1.1.0)
