@@ -6,7 +6,7 @@ require 'puppet/modulebuilder'
 module BeakerPuppetHelpers
   # Methods to help install puppet modules
   module ModuleUtils
-    # Install the desired module with the PMT on a given host
+    # Install the desired module with the Puppet Module Tool (PMT) on a given host
     #
     # @param [Beaker::Host, Array<Beaker::Host>, String, Symbol] hosts
     #   One or more hosts to act upon, or a role (String or Symbol) that
