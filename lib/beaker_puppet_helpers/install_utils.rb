@@ -78,10 +78,16 @@ module BeakerPuppetHelpers
     # @return [String] The Puppet package name
     def self.puppet_package_name(host, prefer_aio: true)
       case host['packaging_platform'].split('-', 3).first
-      when /el|fedora|sles|cisco_|debian|ubuntu/
+      when 'debian'
+        # 12 started to ship puppet-agent with puppet as a legacy package
+        prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 12 ? 'puppet-agent' : 'puppet'
+      when /el|fedora|sles|cisco_/
         prefer_aio ? 'puppet-agent' : 'puppet'
       when /freebsd/
         'sysutils/puppet'
+      when 'ubuntu'
+        # 23.04 started to ship puppet-agent with puppet as a legacy package
+        prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 2304 ? 'puppet-agent' : 'puppet'
       else
         'puppet'
       end
