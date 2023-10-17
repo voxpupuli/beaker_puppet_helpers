@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.2.0) (2023-10-17)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.1.1...1.2.0)
+
+**Implemented enhancements:**
+
+- Always use puppet-agent for Debian 12+ & Ubuntu 23.04+ [\#37](https://github.com/voxpupuli/beaker_puppet_helpers/pull/37) ([ekohl](https://github.com/ekohl))
+
 ## [1.1.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.1.1) (2023-06-16)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.1.0...1.1.1)
@@ -54,7 +62,6 @@ All notable changes to this project will be documented in this file.
 - Fix various RSpec cops before enabling rubocop-rspec [\#13](https://github.com/voxpupuli/beaker_puppet_helpers/pull/13) ([ekohl](https://github.com/ekohl))
 - Drop Ruby 2.5 and 2.6 support [\#12](https://github.com/voxpupuli/beaker_puppet_helpers/pull/12) ([ekohl](https://github.com/ekohl))
 - Make RuboCop mostly happy [\#11](https://github.com/voxpupuli/beaker_puppet_helpers/pull/11) ([ekohl](https://github.com/ekohl))
-- Bump actions/checkout from 2 to 3 [\#10](https://github.com/voxpupuli/beaker_puppet_helpers/pull/10) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Simplify variable setting [\#9](https://github.com/voxpupuli/beaker_puppet_helpers/pull/9) ([ekohl](https://github.com/ekohl))
 - Use rubocop config from voxpupuli-rubocop [\#6](https://github.com/voxpupuli/beaker_puppet_helpers/pull/6) ([bastelfreak](https://github.com/bastelfreak))
 - dependabot: check for github actions and gems [\#5](https://github.com/voxpupuli/beaker_puppet_helpers/pull/5) ([bastelfreak](https://github.com/bastelfreak))
