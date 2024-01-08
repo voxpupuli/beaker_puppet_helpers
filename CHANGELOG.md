@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.2.1) (2024-01-08)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.2.0...1.2.1)
+
+**Fixed bugs:**
+
+- shell escape Puppet command options [\#40](https://github.com/voxpupuli/beaker_puppet_helpers/pull/40) ([ekohl](https://github.com/ekohl))
+- FreeBSD has the Puppet major version in the package name [\#39](https://github.com/voxpupuli/beaker_puppet_helpers/pull/39) ([evgeni](https://github.com/evgeni))
+
 ## [1.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.2.0) (2023-10-17)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.1.1...1.2.0)
