@@ -173,7 +173,7 @@ module BeakerPuppetHelpers
 
         puppet_apply_opts = host[:default_apply_opts].merge(puppet_apply_opts) if host[:default_apply_opts].respond_to? :merge
 
-        file_path = host.tmpfile(%(apply_manifest_#{Time.now.strftime('%H%M%S%L')}.pp))
+        file_path = host.tmpfile(%(apply_manifest_#{Time.now.strftime('%H%M%S%L')}), '.pp')
         begin
           create_remote_file(host, file_path, "#{manifest}\n")
 

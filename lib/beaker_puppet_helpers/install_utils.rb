@@ -99,8 +99,7 @@ module BeakerPuppetHelpers
     def self.wget_on(host, url)
       extension = File.extname(url)
       name = File.basename(url, extension)
-      # Can't use host.tmpfile since we need to set an extension
-      target = host.exec(Beaker::Command.new("mktemp -t '#{name}-XXXXXX#{extension}'")).stdout.strip
+      target = host.tmpfile(name, extension)
       begin
         host.exec(Beaker::Command.new("wget -O '#{target}' '#{url}'"))
         yield target
