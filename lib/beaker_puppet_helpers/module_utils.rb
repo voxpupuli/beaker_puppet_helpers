@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'shellwords'
 require 'beaker/command'
 require 'puppet/modulebuilder'
 
@@ -21,8 +22,8 @@ module BeakerPuppetHelpers
       block_on hosts do |host|
         puppet_opts = {}
         puppet_opts.merge!(host[:default_module_install_opts]) if host[:default_module_install_opts]
-        puppet_opts[:version] = version if version
-        puppet_opts[:module_repository] = module_repository if module_repository
+        puppet_opts[:version] = Shellwords.escape(version) if version
+        puppet_opts[:module_repository] = Shellwords.escape(module_repository) if module_repository
 
         on host, Beaker::PuppetCommand.new('module', ['install', module_name], puppet_opts)
       end

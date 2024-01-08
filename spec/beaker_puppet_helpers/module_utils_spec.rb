@@ -37,6 +37,13 @@ describe BeakerPuppetHelpers::ModuleUtils do
       dsl.install_puppet_module_via_pmt_on(host, 'test', '1.2.3')
     end
 
+    it 'escapes the version parameter' do
+      expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { version: '\\>\\=\\ 4.0\\ \\<\\ 6.0' }).once
+      expect(dsl).to receive(:on).with(host, anything).once
+
+      dsl.install_puppet_module_via_pmt_on(host, 'test', '>= 4.0 < 6.0')
+    end
+
     it 'accepts the module_repository parameter' do
       expect(Beaker::PuppetCommand).to receive(:new).with('module', %w[install test], { module_repository: 'http://forge.example.com' }).once
       expect(dsl).to receive(:on).with(host, anything).once
