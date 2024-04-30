@@ -224,5 +224,30 @@ module BeakerPuppetHelpers
     def fact(name, opts = {})
       fact_on(default, name, opts)
     end
+
+    # Show if bolt package is available
+    #
+    # @param [Beaker::Host] host
+    # @return True if package is available.
+    #
+    def bolt_supported?(host = default)
+      #
+      # Supported platforms
+      # https://github.com/puppetlabs/bolt/blob/main/documentation/bolt_installing.md
+      # https://github.com/puppetlabs/bolt-vanagon/tree/main/configs/platforms
+
+      case host['packaging_platform'].split('-', 3)[0, 1]
+      when %w[el 7], %w[el 8], %w[el 9],
+        %w[debian 10], %w[debian 11],
+        ['ubuntu', '20.04'], ['ubuntu', '22.04'],
+        %w[osx 11], %w[osx 12],
+        %w[sles 12], %w[sles 15],
+        %w[fedora 36],
+        %w[windows 2012r2]
+        true
+      else
+        false
+      end
+    end
   end
 end
