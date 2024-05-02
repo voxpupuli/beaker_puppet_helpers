@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.3.0) (2024-05-02)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.2.1...1.3.0)
+
+**Implemented enhancements:**
+
+- Add Ruby 3.3 to CI [\#44](https://github.com/voxpupuli/beaker_puppet_helpers/pull/44) ([traylenator](https://github.com/traylenator))
+- New beaker helper `bolt_supported?` to show bolt availability [\#42](https://github.com/voxpupuli/beaker_puppet_helpers/pull/42) ([traylenator](https://github.com/traylenator))
+
 ## [1.2.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.2.1) (2024-01-08)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.2.0...1.2.1)
