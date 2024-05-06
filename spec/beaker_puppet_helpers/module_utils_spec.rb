@@ -97,7 +97,7 @@ describe BeakerPuppetHelpers::ModuleUtils do
       expect(Puppet::Modulebuilder::Builder).to receive(:new).with('/path/to/module').and_return(builder)
       expect(builder).to receive(:build).and_return('/path/to/tarball')
 
-      expect(host).to receive(:tmpfile).with('puppet_module').and_return('temp')
+      expect(host).to receive(:tmpfile).with('puppet_module', '.tar.gz').and_return('temp')
       expect(host).to receive(:do_scp_to).with('/path/to/tarball', 'temp', {})
       expect(dsl).to receive(:install_puppet_module_via_pmt_on).with(host, 'temp')
       expect(host).to receive(:rm_rf).with('temp')
