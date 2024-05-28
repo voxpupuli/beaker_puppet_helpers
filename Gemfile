@@ -13,7 +13,7 @@ group :development do
 end
 
 group :rubocop do
-  gem 'voxpupuli-rubocop', '~> 1.2'
+  gem 'voxpupuli-rubocop', '~> 2.7.0'
 end
 
 group :test do
