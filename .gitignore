@@ -11,3 +11,4 @@ junit/
 tmp/
 vendor/
 .vendor/
+.bundle/
