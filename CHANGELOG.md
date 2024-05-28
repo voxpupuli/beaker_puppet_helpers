@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.4.0) (2024-05-28)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.3.0...1.4.0)
+
+**Implemented enhancements:**
+
+- beaker: Allow 6.x [\#47](https://github.com/voxpupuli/beaker_puppet_helpers/pull/47) ([bastelfreak](https://github.com/bastelfreak))
+- Use tmpfile extension [\#3](https://github.com/voxpupuli/beaker_puppet_helpers/pull/3) ([ekohl](https://github.com/ekohl))
+
+**Merged pull requests:**
+
+- .gitignore: add .bundle [\#46](https://github.com/voxpupuli/beaker_puppet_helpers/pull/46) ([bastelfreak](https://github.com/bastelfreak))
+- voxpupuli-rubocop: Require 2.7.0 [\#45](https://github.com/voxpupuli/beaker_puppet_helpers/pull/45) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [1.3.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.3.0) (2024-05-02)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.2.1...1.3.0)
