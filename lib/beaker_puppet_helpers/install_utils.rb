@@ -80,14 +80,14 @@ module BeakerPuppetHelpers
       case host['packaging_platform'].split('-', 3).first
       when 'debian'
         # 12 started to ship puppet-agent with puppet as a legacy package
-        prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 12 ? 'puppet-agent' : 'puppet'
+        (prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 12) ? 'puppet-agent' : 'puppet'
       when /el|fedora|sles|cisco_/
         prefer_aio ? 'puppet-agent' : 'puppet'
       when /freebsd/
         'sysutils/puppet8'
       when 'ubuntu'
         # 23.04 started to ship puppet-agent with puppet as a legacy package
-        prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 2304 ? 'puppet-agent' : 'puppet'
+        (prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 2304) ? 'puppet-agent' : 'puppet'
       else
         'puppet'
       end
