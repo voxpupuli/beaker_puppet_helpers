@@ -34,7 +34,7 @@ desc <<~DESC
 DESC
 task :acceptance do
   hosts = {
-    aio: %w[centos7 centos8 debian10 debian11],
+    aio: %w[centos9 debian11 debian12],
     foss: %w[debian10 debian11 debian12 fedora37 fedora38],
   }
   default_hosts = hosts.map { |type, h| h.map { |host| "#{host}-64{type=#{type}}" }.join('-') }.join('-')
