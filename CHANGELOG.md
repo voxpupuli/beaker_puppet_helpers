@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.5.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.5.0) (2024-10-15)
+## [1.6.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.6.0) (2024-12-11)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.5.0...1.6.0)
+
+**Implemented enhancements:**
+
+- update fact\_on\(\) from `facter` to `puppet facts` [\#54](https://github.com/voxpupuli/beaker_puppet_helpers/pull/54) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- voxpupuli-rubocop: Update 2.7.0-\>3.0.0 [\#53](https://github.com/voxpupuli/beaker_puppet_helpers/pull/53) ([bastelfreak](https://github.com/bastelfreak))
+
+## [1.5.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.5.0) (2024-10-16)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.4.0...1.5.0)
 
