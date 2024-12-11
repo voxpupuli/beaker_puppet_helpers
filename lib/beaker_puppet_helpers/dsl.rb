@@ -205,13 +205,7 @@ module BeakerPuppetHelpers
     def fact_on(host, name, opts = {})
       raise(ArgumentError, "fact_on's `name` option must be a String. You provided a #{name.class}: '#{name}'") unless name.is_a?(String)
 
-      if opts.is_a?(Hash)
-        opts['json'] = nil
-      else
-        opts << ' --json'
-      end
-
-      result = on host, Beaker::Command.new('facter', [name], opts)
+      result = on host, Beaker::Command.new('puppet facts show', [name], opts)
       if result.is_a?(Array)
         result.map { |res| JSON.parse(res.stdout)[name] }
       else
