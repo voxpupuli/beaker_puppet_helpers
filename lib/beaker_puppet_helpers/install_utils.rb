@@ -7,13 +7,23 @@ module BeakerPuppetHelpers
   class InstallUtils
     # @api private
     REPOS = {
-      release: {
-        apt: 'https://apt.puppet.com',
-        yum: 'https://yum.puppet.com',
+      openvox: {
+        release: {
+          apt: 'https://apt.voxpupuli.org/',
+          yum: 'https://yum.voxpupuli.org/',
+        },
+        # no nightlies yet, but soon!
+        nightly: {},
       },
-      nightly: {
-        apt: 'https://nightlies.puppet.com/apt',
-        yum: 'https://nightlies.puppet.com/yum',
+      puppet: {
+        release: {
+          apt: 'https://apt.puppet.com',
+          yum: 'https://yum.puppet.com',
+        },
+        nightly: {
+          apt: 'https://nightlies.puppet.com/apt',
+          yum: 'https://nightlies.puppet.com/yum',
+        },
       },
     }.freeze
 
@@ -24,9 +34,12 @@ module BeakerPuppetHelpers
     #
     # @param [Beaker::Host] host
     #   A host to act upon.
+    #
     # @param [String] collection
     #   The collection to install. The default (puppet) is the latest
-    #   available version.
+    #   available version. Can also be openvox7, puppet8 and others.
+    #   Method is called from beaker_install_helpers
+    #
     # @param [Boolean] nightly
     #   Whether to install nightly or release packages
     #
@@ -34,7 +47,8 @@ module BeakerPuppetHelpers
     #   are no official Puppet releases for other platforms.
     #
     def self.install_puppet_release_repo_on(host, collection = 'puppet', nightly: false)
-      repos = REPOS[nightly ? :nightly : :release]
+      requirement_name = collection.gsub(/\d+/, '')
+      repos = REPOS[requirement_name.to_sym][nightly ? :nightly : :release]
 
       variant, version, _arch = host['packaging_platform'].split('-', 3)
 
@@ -56,7 +70,8 @@ module BeakerPuppetHelpers
         url = "#{repos[:yum]}/#{collection}-release-#{variant}-#{version}.noarch.rpm"
         host.install_package(url)
       when 'debian', 'ubuntu'
-        url = "#{repos[:apt]}/#{collection}-release-#{host['platform'].codename}.deb"
+        relname = (requirement_name == 'openvox') ? "#{variant}#{version}" : host['platform'].codename
+        url = "#{repos[:apt]}/#{collection}-release-#{relname}.deb"
         wget_on(host, url) do |filename|
           host.install_package(filename)
         end
@@ -66,6 +81,28 @@ module BeakerPuppetHelpers
         host.add_env_var('PATH', '/opt/puppetlabs/bin')
       else
         raise "No repository installation step for #{variant} yet..."
+      end
+    end
+
+    # Determine if we need the Perforce or OpenVox Package name
+    #
+    # @param [Beaker::Host] host
+    #   The host to act on
+    # @param [Boolean] prefer_aio
+    #   Whether to prefer AIO packages or OS packages
+    # @param implementation
+    #   If we are on OpenVox or Perforce
+    # @return [String] the package name
+    def self.package_name(host, prefer_aio: true, implementation: 'openvox')
+      case implementation
+      when 'openvox'
+        openvox_package_name
+      when 'puppet'
+        puppet_package_name(host, prefer_aio: prefer_aio)
+      when 'none'
+        'puppet'
+      else
+        raise StandardError, "Unknown requirement '#{implementation}'"
       end
     end
 
@@ -91,6 +128,13 @@ module BeakerPuppetHelpers
       else
         'puppet'
       end
+    end
+
+    # Determine the openvox package name
+    #
+    # @return [String] The openvox package name
+    def self.openvox_package_name
+      'openvox-agent'
     end
 
     # @param [Beaker::Host] host
