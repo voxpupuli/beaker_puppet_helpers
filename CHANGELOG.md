@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.0.0) (2025-03-18)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.6.0...2.0.0)
+
+**Breaking changes:**
+
+- Drop support for nightly repos [\#57](https://github.com/voxpupuli/beaker_puppet_helpers/pull/57) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Implement OpenVox support [\#56](https://github.com/voxpupuli/beaker_puppet_helpers/pull/56) ([bastelfreak](https://github.com/bastelfreak))
+- CI: Use voxpupuli/ruby-version@v1 / Add Ruby 3.4 support [\#58](https://github.com/voxpupuli/beaker_puppet_helpers/pull/58) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [1.6.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.6.0) (2024-12-11)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.5.0...1.6.0)
