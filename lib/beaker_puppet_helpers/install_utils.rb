@@ -12,17 +12,11 @@ module BeakerPuppetHelpers
           apt: 'https://apt.voxpupuli.org/',
           yum: 'https://yum.voxpupuli.org/',
         },
-        # no nightlies yet, but soon!
-        nightly: {},
       },
       puppet: {
         release: {
           apt: 'https://apt.puppet.com',
           yum: 'https://yum.puppet.com',
-        },
-        nightly: {
-          apt: 'https://nightlies.puppet.com/apt',
-          yum: 'https://nightlies.puppet.com/yum',
         },
       },
     }.freeze
@@ -40,15 +34,12 @@ module BeakerPuppetHelpers
     #   available version. Can also be openvox7, puppet8 and others.
     #   Method is called from beaker_install_helpers
     #
-    # @param [Boolean] nightly
-    #   Whether to install nightly or release packages
-    #
     # @note This method only works on redhat-like and debian-like hosts. There
     #   are no official Puppet releases for other platforms.
     #
-    def self.install_puppet_release_repo_on(host, collection = 'puppet', nightly: false)
+    def self.install_puppet_release_repo_on(host, collection = 'puppet')
       requirement_name = collection.gsub(/\d+/, '')
-      repos = REPOS[requirement_name.to_sym][nightly ? :nightly : :release]
+      repos = REPOS[requirement_name.to_sym][:release]
 
       variant, version, _arch = host['packaging_platform'].split('-', 3)
 
