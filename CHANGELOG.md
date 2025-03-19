@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.1.0) (2025-03-19)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.0.0...2.1.0)
+
+**Implemented enhancements:**
+
+- Add helper to get agent package name based on collection [\#60](https://github.com/voxpupuli/beaker_puppet_helpers/pull/60) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [2.0.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.0.0) (2025-03-18)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/1.6.0...2.0.0)
@@ -12,8 +20,8 @@ All notable changes to this project will be documented in this file.
 
 **Implemented enhancements:**
 
-- Implement OpenVox support [\#56](https://github.com/voxpupuli/beaker_puppet_helpers/pull/56) ([bastelfreak](https://github.com/bastelfreak))
 - CI: Use voxpupuli/ruby-version@v1 / Add Ruby 3.4 support [\#58](https://github.com/voxpupuli/beaker_puppet_helpers/pull/58) ([bastelfreak](https://github.com/bastelfreak))
+- Implement OpenVox support [\#56](https://github.com/voxpupuli/beaker_puppet_helpers/pull/56) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [1.6.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/1.6.0) (2024-12-11)
 
