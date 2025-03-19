@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.2.0) (2025-03-19)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.1.0...2.2.0)
+
+**Implemented enhancements:**
+
+- Support the none collection in implementation helpers [\#62](https://github.com/voxpupuli/beaker_puppet_helpers/pull/62) ([ekohl](https://github.com/ekohl))
+
 ## [2.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.1.0) (2025-03-19)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.0.0...2.1.0)
