@@ -21,6 +21,15 @@ module BeakerPuppetHelpers
       },
     }.freeze
 
+    # returns the used implementation (puppet or openvox)
+    #
+    # @param [String] collection
+    #   The used collection (puppet7, openvox8...)
+    # @return [String] the implementation
+    def self.implementation_from_collection(collection)
+      collection.gsub(/\d+/, '')
+    end
+
     # Install official Puppet release repository configuration on host(s).
     #
     # @example Install Puppet 7
@@ -38,8 +47,8 @@ module BeakerPuppetHelpers
     #   are no official Puppet releases for other platforms.
     #
     def self.install_puppet_release_repo_on(host, collection = 'puppet')
-      requirement_name = collection.gsub(/\d+/, '')
-      repos = REPOS[requirement_name.to_sym][:release]
+      implementation = implementation_from_collection(collection)
+      repos = REPOS[implementation.to_sym][:release]
 
       variant, version, _arch = host['packaging_platform'].split('-', 3)
 
@@ -61,7 +70,7 @@ module BeakerPuppetHelpers
         url = "#{repos[:yum]}/#{collection}-release-#{variant}-#{version}.noarch.rpm"
         host.install_package(url)
       when 'debian', 'ubuntu'
-        relname = (requirement_name == 'openvox') ? "#{variant}#{version}" : host['platform'].codename
+        relname = (implementation == 'openvox') ? "#{variant}#{version}" : host['platform'].codename
         url = "#{repos[:apt]}/#{collection}-release-#{relname}.deb"
         wget_on(host, url) do |filename|
           host.install_package(filename)
@@ -75,13 +84,13 @@ module BeakerPuppetHelpers
       end
     end
 
-    # Determine if we need the Perforce or OpenVox Package name
+    # Determine the correct package name, based on implementation, AIO and OS
     #
     # @param [Beaker::Host] host
     #   The host to act on
     # @param [Boolean] prefer_aio
     #   Whether to prefer AIO packages or OS packages
-    # @param implementation
+    # @param [String] implementation
     #   If we are on OpenVox or Perforce
     # @return [String] the package name
     def self.package_name(host, prefer_aio: true, implementation: 'openvox')
@@ -95,6 +104,20 @@ module BeakerPuppetHelpers
       else
         raise StandardError, "Unknown requirement '#{implementation}'"
       end
+    end
+
+    # Determine if we need the Perforce or OpenVox Package, based on the collection
+    #
+    # @param [Beaker::Host] host
+    #   The host to act on
+    # @param collection
+    #   The used collection (puppet7, openvox8...)
+    # @param [Boolean] prefer_aio
+    #   Whether to prefer AIO packages or OS packages
+    # @return [String] the package name
+    def self.collection2packagename(host, collection, prefer_aio: true)
+      implementation = implementation_from_collection(collection)
+      package_name(host, prefer_aio: prefer_aio, implementation: implementation)
     end
 
     # Determine the Puppet package name
