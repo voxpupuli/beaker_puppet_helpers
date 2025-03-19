@@ -27,7 +27,11 @@ module BeakerPuppetHelpers
     #   The used collection (puppet7, openvox8...)
     # @return [String] the implementation
     def self.implementation_from_collection(collection)
-      collection.gsub(/\d+/, '')
+      if collection == 'none'
+        'puppet'
+      else
+        collection.gsub(/\d+/, '')
+      end
     end
 
     # Install official Puppet release repository configuration on host(s).
@@ -111,11 +115,14 @@ module BeakerPuppetHelpers
     # @param [Beaker::Host] host
     #   The host to act on
     # @param collection
-    #   The used collection (puppet7, openvox8...)
-    # @param [Boolean] prefer_aio
-    #   Whether to prefer AIO packages or OS packages
+    #   The used collection (none, puppet7, openvox8, ...)
+    # @param [Optional[Boolean]] prefer_aio
+    #   Whether to prefer AIO packages or OS packages. If not specified, it's
+    #   derived from the collection
     # @return [String] the package name
-    def self.collection2packagename(host, collection, prefer_aio: true)
+    def self.collection2packagename(host, collection, prefer_aio: nil)
+      prefer_aio = collection != 'none' if prefer_aio.nil?
+
       implementation = implementation_from_collection(collection)
       package_name(host, prefer_aio: prefer_aio, implementation: implementation)
     end
