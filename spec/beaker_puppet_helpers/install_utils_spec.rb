@@ -55,7 +55,10 @@ describe BeakerPuppetHelpers::InstallUtils do
 
         before { allow(host).to receive(:[]).with('platform').and_return(packaging_platform) }
 
-        it 'installs from the correct url and runs apt-get update' do
+        it 'installs from the correct url and runs apt-get update' do # rubocop:disable RSpec/MultipleExpectations
+          expect(described_class).to receive(:wget_on).with(host, 'https://apt.puppet.com/DEB-GPG-KEY-future').and_yield('DEB-GPG-KEY-future')
+          expect(Beaker::Command).to receive(:new).with('mv \'DEB-GPG-KEY-future\' /etc/apt/trusted.gpg.d/puppet.asc && chmod 644 /etc/apt/trusted.gpg.d/puppet.asc').and_return('mv \'DEB-GPG-KEY-future\' /etc/apt/trusted.gpg.d/puppet.asc && chmod 644 /etc/apt/trusted.gpg.d/puppet.asc')
+          expect(host).to receive(:exec).with('mv \'DEB-GPG-KEY-future\' /etc/apt/trusted.gpg.d/puppet.asc && chmod 644 /etc/apt/trusted.gpg.d/puppet.asc')
           expect(described_class).to receive(:wget_on).with(host, 'https://apt.puppet.com/puppet-release-bullseye.deb').and_yield('filename.deb')
           expect(host).to receive(:install_package).with('filename.deb')
           expect(Beaker::Command).to receive(:new).with('apt-get update').and_return('apt-get update')

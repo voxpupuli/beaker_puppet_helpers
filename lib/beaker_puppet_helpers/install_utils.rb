@@ -79,6 +79,17 @@ module BeakerPuppetHelpers
         wget_on(host, url) do |filename|
           host.install_package(filename)
         end
+        if implementation == 'puppet'
+          # the old key puppet-20250406 expired, `future` is a new one, without expiration date
+          #   kjetilho | bastelfreak: the FUTURE key is the same key used since 2019, just without the expire date
+          #   kjetilho | so it will work with all new and old repos
+          # because of ^ statement from IRC, we're only importing the newest key here
+          # We need the chmod to avoid:
+          #   The key(s) in the keyring /etc/apt/trusted.gpg.d/puppet.asc are ignored as the file is not readable by user '_apt' executing apt-key.
+          wget_on(host, 'https://apt.puppet.com/DEB-GPG-KEY-future') do |filename|
+            host.exec(Beaker::Command.new("mv '#{filename}' /etc/apt/trusted.gpg.d/puppet.asc && chmod 644 /etc/apt/trusted.gpg.d/puppet.asc"))
+          end
+        end
         host.exec(Beaker::Command.new('apt-get update'))
 
         # On Debian we can't count on /etc/profile.d
