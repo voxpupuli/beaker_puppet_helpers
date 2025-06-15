@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.3.0) (2025-06-15)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.2.0...2.3.0)
+
+**Implemented enhancements:**
+
+- Remove base64 & benchmark dependencies [\#68](https://github.com/voxpupuli/beaker_puppet_helpers/pull/68) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [2.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.2.0) (2025-03-19)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.1.0...2.2.0)
