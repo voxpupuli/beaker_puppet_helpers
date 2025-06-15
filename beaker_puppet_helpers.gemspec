@@ -18,7 +18,4 @@ Gem::Specification.new do |s|
   # Run time dependencies
   s.add_dependency 'beaker', '>= 5.8.1', '< 7'
   s.add_dependency 'puppet-modulebuilder', '>= 0.3', '< 3'
-  # we need to declare both dependencies explicitly on Ruby 3.4+
-  s.add_dependency 'base64', '>= 0.2', '< 1'
-  s.add_dependency 'benchmark', '~> 0.4.0'
 end
