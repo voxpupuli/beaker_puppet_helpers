@@ -27,7 +27,7 @@ when 'vagrant', 'vagrant_libvirt'
   gem 'beaker-vagrant'
 end
 
-group :release do
+group :release, optional: true do
   gem 'faraday-retry', require: false
   gem 'github_changelog_generator', require: false
 end
