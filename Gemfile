@@ -13,7 +13,7 @@ group :development do
 end
 
 group :rubocop do
-  gem 'voxpupuli-rubocop', '~> 3.0.0'
+  gem 'voxpupuli-rubocop', '~> 3.1.0'
 end
 
 group :test do
@@ -27,7 +27,7 @@ when 'vagrant', 'vagrant_libvirt'
   gem 'beaker-vagrant'
 end
 
-group :release do
+group :release, optional: true do
   gem 'faraday-retry', require: false
   gem 'github_changelog_generator', require: false
 end
