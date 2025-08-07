@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   # Run time dependencies
-  s.add_dependency 'beaker', '>= 5.8.1', '< 7'
+  s.add_dependency 'beaker', '>= 5.8.1', '< 8'
   s.add_dependency 'puppet-modulebuilder', '>= 0.3', '< 3'
 end
