@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.0.0) (2025-08-07)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.3.0...3.0.0)
+
+**Breaking changes:**
+
+- Require Ruby 3.2 or newer [\#73](https://github.com/voxpupuli/beaker_puppet_helpers/pull/73) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- beaker: Allow 7.x [\#72](https://github.com/voxpupuli/beaker_puppet_helpers/pull/72) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- CI: Dont test on Debian 10 [\#71](https://github.com/voxpupuli/beaker_puppet_helpers/pull/71) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [2.3.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/2.3.0) (2025-06-15)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.2.0...2.3.0)
