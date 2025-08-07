@@ -12,10 +12,6 @@ group :development do
   gem 'yard'
 end
 
-group :rubocop do
-  gem 'voxpupuli-rubocop', '~> 3.1.0'
-end
-
 group :test do
   gem 'rspec', '~> 3.0'
 end

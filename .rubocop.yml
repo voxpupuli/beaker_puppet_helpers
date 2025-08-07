@@ -12,3 +12,6 @@ RSpec/SubjectStub:
 
 RSpec/StubbedMock:
   Enabled: false
+
+AllCops:
+  TargetRubyVersion: 3.2

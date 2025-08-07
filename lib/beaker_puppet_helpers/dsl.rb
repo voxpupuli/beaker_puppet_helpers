@@ -189,8 +189,8 @@ module BeakerPuppetHelpers
     # @return [Array<Result>, Result, nil] An array of results, a result
     #   object, or nil. Check {Beaker::Shared::HostManager#run_block_on} for
     #   more details on this.
-    def apply_manifest(manifest, opts = {}, &block)
-      apply_manifest_on(default, manifest, opts, &block)
+    def apply_manifest(manifest, opts = {}, &)
+      apply_manifest_on(default, manifest, opts, &)
     end
 
     # Get a facter fact from a provided host

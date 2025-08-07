@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = 'For use for the Beaker acceptance testing tool'
   s.license     = 'Apache-2.0'
 
-  s.required_ruby_version = '>= 2.7', '< 4'
+  s.required_ruby_version = '>= 3.2', '< 4'
 
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   # Run time dependencies
   s.add_dependency 'beaker', '>= 5.8.1', '< 8'
   s.add_dependency 'puppet-modulebuilder', '>= 0.3', '< 3'
+
+  s.add_development_dependency 'voxpupuli-rubocop', '~> 4.1.0'
 end
