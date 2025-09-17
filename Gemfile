@@ -6,7 +6,6 @@ gemspec
 
 gem 'nokogiri', require: false
 gem 'open-uri', require: false
-gem 'pry'
 gem 'rake', '~> 13.0', groups: %i[development test release]
 
 group :development do
