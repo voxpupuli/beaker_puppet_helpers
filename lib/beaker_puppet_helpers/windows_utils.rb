@@ -163,8 +163,10 @@ module BeakerPuppetHelpers
     # Given hosts construct a PATH that includes puppetbindir, facterbindir and hierabindir
     # @param [Host, Array<Host>, String, Symbol] hosts    One or more hosts to act upon,
     #                            or a role (String or Symbol) that identifies one or more hosts.
-    # @param [String] msi_path The path of the MSI - can be a local Windows style file path like
+    # @param [String] msi_path
+    #                   The path of the MSI - can be a local Windows style file path like
     #                   c:\temp\puppet.msi OR a url like https://download.com/puppet.msi or file://c:\temp\puppet.msi
+    #                   can also be a collection like 'puppet', 'puppet8', 'openvox', or 'openvox8'
     # @param  [Hash{String=>String}] msi_opts MSI installer options
     #                   See https://docs.puppetlabs.com/guides/install_puppet/install_windows.html#msi-properties
     # @option msi_opts [String] INSTALLIDIR Where Puppet and its dependencies should be installed.
