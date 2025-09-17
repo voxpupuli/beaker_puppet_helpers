@@ -50,11 +50,11 @@ module HostHelpers
   end
 
   def generate_result(name, opts)
-    result = double('result')
     stdout = opts.key?(:stdout) ? opts[:stdout] : name
     stderr = opts.key?(:stderr) ? opts[:stderr] : name
     exit_code = opts.key?(:exit_code) ? opts[:exit_code] : 0
     exit_code = [exit_code].flatten
+    result = instance_double(Beaker::Result, stdout: stdout, stderr: stderr)
     allow(result).to receive_messages(stdout: stdout, stderr: stderr)
     allow(result).to receive(:exit_code).and_return(*exit_code)
     result
