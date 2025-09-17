@@ -202,9 +202,11 @@ module BeakerPuppetHelpers
     #
     # @api private
     def install_msi_on(hosts, msi_path, msi_opts = {}, opts = {})
+      # If the msi patch matches a collection, get the url for the latest msi available for that collection
+      expanded_msi_path = /^(puppet|openvox)\d*$/.match?(msi_path) ? get_agent_package_url(msi_path) : msi_path
       block_on hosts do |host|
         msi_opts['PUPPET_AGENT_STARTUP_MODE'] ||= 'Manual'
-        batch_path, log_file = create_install_msi_batch_on(host, msi_path, msi_opts)
+        batch_path, log_file = create_install_msi_batch_on(host, expanded_msi_path, msi_opts)
         # Powershell command looses an escaped slash resulting in cygwin relative path
         # See https://github.com/puppetlabs/beaker/pull/1626#issuecomment-621341555
         log_file_escaped = log_file.gsub('\\', '\\\\\\')
@@ -280,8 +282,10 @@ module BeakerPuppetHelpers
     # Installs a specified msi path on given hosts
     # @param [Host, Array<Host>, String, Symbol] hosts    One or more hosts to act upon,
     #                            or a role (String or Symbol) that identifies one or more hosts.
-    # @param [String] msi_path The path of the MSI - can be a local Windows style file path like
+    # @param [String] msi_path
+    #                   The path of the MSI - can be a local Windows style file path like
     #                   c:\temp\foo.msi OR a url like https://download.com/foo.msi or file://c:\temp\foo.msi
+    #                   can also be a collection like 'puppet', 'puppet8', 'openvox', or 'openvox8'
     # @param  [Hash{String=>String}] msi_opts MSI installer options
     # @option opts [Boolean] :debug output the MSI installation log when set to true
     #                 otherwise do not output log (false; default behavior)
@@ -291,8 +295,11 @@ module BeakerPuppetHelpers
     #
     # @api private
     def generic_install_msi_on(hosts, msi_path, msi_opts = {}, opts = {})
+      # If the msi patch matches a collection, get the url for the latest msi available for that collection
+      expanded_msi_path = /^(puppet|openvox)\d*$/.match?(msi_path) ? get_agent_package_url(msi_path) : msi_path
+
       block_on hosts do |host|
-        batch_path, log_file = create_install_msi_batch_on(host, msi_path, msi_opts)
+        batch_path, log_file = create_install_msi_batch_on(host, expanded_msi_path, msi_opts)
         # Powershell command looses an escaped slash resulting in cygwin relative path
         # See https://github.com/puppetlabs/beaker/pull/1626#issuecomment-621341555
         log_file_escaped = log_file.gsub('\\', '\\\\\\')
