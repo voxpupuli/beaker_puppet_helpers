@@ -25,7 +25,7 @@ module BeakerPuppetHelpers
     #   The collection to install. The default (openvox) is the latest
     #   available version. Can also be openvox8, puppet8 and others.
     #
-    # @return [String] name of the newest msi available in the package repo
+    # @return [String] url of the newest msi available in the package repo
     def get_agent_package_url(collection = 'openvox')
       windows_package_base_url =
         if collection.start_with?('puppet')
