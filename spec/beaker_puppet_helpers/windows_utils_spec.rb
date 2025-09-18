@@ -77,16 +77,6 @@ describe BeakerPuppetHelpers::WindowsUtils do
     end
   end
 
-  def expect_script_matches(hosts, contents)
-    hosts.each do |host|
-      expect(host)
-        .to receive(:do_scp_to) do |local_path, _remote_path|
-          expect(File.read(local_path)).to match(contents)
-        end
-        .and_return(true)
-    end
-  end
-
   def expect_reg_query_called(_times = hosts.length)
     expect(hosts).to all(receive(:is_x86_64?).and_return(true))
 
@@ -218,7 +208,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
       expect_reg_query_called
       expect_version_log_called
       expect(dsl).to receive(:create_install_msi_batch_on).with(anything, anything, { 'PUPPET_AGENT_STARTUP_MODE' => 'Manual' })
-      dsl.install_msi_on(hosts, msi_path, {})
+      dsl.install_msi_on(hosts, msi_path, msi_opts: {})
     end
 
     it 'allows configuration of PUPPET_AGENT_STARTUP_MODE to Automatic' do
@@ -229,7 +219,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
       expect_version_log_called
       value = 'Automatic'
       expect(dsl).to receive(:create_install_msi_batch_on).with(anything, anything, { 'PUPPET_AGENT_STARTUP_MODE' => value })
-      dsl.install_msi_on(hosts, msi_path, { 'PUPPET_AGENT_STARTUP_MODE' => value })
+      dsl.install_msi_on(hosts, msi_path, msi_opts: { 'PUPPET_AGENT_STARTUP_MODE' => value })
     end
 
     it 'allows configuration of PUPPET_AGENT_STARTUP_MODE to Disabled' do
@@ -240,7 +230,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
       expect_version_log_called
       value = 'Disabled'
       expect(dsl).to receive(:create_install_msi_batch_on).with(anything, anything, { 'PUPPET_AGENT_STARTUP_MODE' => value })
-      dsl.install_msi_on(hosts, msi_path, { 'PUPPET_AGENT_STARTUP_MODE' => value })
+      dsl.install_msi_on(hosts, msi_path, msi_opts: { 'PUPPET_AGENT_STARTUP_MODE' => value })
     end
 
     it 'does not generate a command to emit a log file without the :debug option set' do
@@ -277,7 +267,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
 
       expect(dsl).to receive(:file_contents_on).with(anything, log_file).exactly(hosts.length).times
 
-      dsl.install_msi_on(hosts, msi_path, {}, { debug: true })
+      dsl.install_msi_on(hosts, msi_path, msi_opts: {}, opts: { debug: true })
     end
 
     it 'passes msi_path to #create_install_msi_batch_on as-is' do
@@ -303,7 +293,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
         expect(dsl).to receive(:on).with(host, having_attributes(command: 'reg query "HKLM\\SOFTWARE\\Wow6432Node\\Puppet Labs\\PuppetInstaller" /v "RememberedPuppetAgentStartupMode" | findstr Manual'))
       end
 
-      dsl.install_msi_on(hosts, msi_path, { 'PUPPET_AGENT_STARTUP_MODE' => 'Manual' })
+      dsl.install_msi_on(hosts, msi_path, msi_opts: { 'PUPPET_AGENT_STARTUP_MODE' => 'Manual' })
     end
 
     it 'omits Wow6432Node in the registry search for remembered startup setting on 32-bit hosts' do
@@ -318,7 +308,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
         expect(dsl).to receive(:on).with(host, having_attributes(command: 'reg query "HKLM\\SOFTWARE\\Puppet Labs\\PuppetInstaller" /v "RememberedPuppetAgentStartupMode" | findstr Manual'))
       end
 
-      dsl.install_msi_on(hosts, msi_path, { 'PUPPET_AGENT_STARTUP_MODE' => 'Manual' })
+      dsl.install_msi_on(hosts, msi_path, msi_opts: { 'PUPPET_AGENT_STARTUP_MODE' => 'Manual' })
     end
   end
 

@@ -181,7 +181,7 @@ module BeakerPuppetHelpers
     #  install_msi_on(hosts, 'c:\puppet.msi', {:debug => true})
     #
     # @api private
-    def install_msi_on(hosts, msi_path, msi_opts = {}, opts = {})
+    def install_msi_on(hosts, msi_path, msi_opts: {}, opts: {})
       # If the msi patch matches a collection, get the url for the latest msi available for that collection
       expanded_msi_path = /^(puppet|openvox)\d*$/.match?(msi_path) ? get_agent_package_url(msi_path) : msi_path
       block_on hosts do |host|
@@ -274,7 +274,7 @@ module BeakerPuppetHelpers
     #  generic_install_msi_on(hosts, 'https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4.msi', {}, {:debug => true})
     #
     # @api private
-    def generic_install_msi_on(hosts, msi_path, msi_opts = {}, opts = {})
+    def generic_install_msi_on(hosts, msi_path, msi_opts: {}, opts: {})
       # If the msi patch matches a collection, get the url for the latest msi available for that collection
       expanded_msi_path = /^(puppet|openvox)\d*$/.match?(msi_path) ? get_agent_package_url(msi_path) : msi_path
 
