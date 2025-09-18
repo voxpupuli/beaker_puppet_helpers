@@ -174,8 +174,7 @@ module BeakerPuppetHelpers
     # @option msi_opts [String] PUPPET_AGENT_ACCOUNT_DOMAIN The domain of puppet agent’s user account.
     #                  (Defaults to .)
     #                  Requires Puppet 3.4.0 / PE 3.2.0
-    # @option opts [Boolean] :debug output the MSI installation log when set to true
-    #                 otherwise do not output log (false; default behavior)
+    # @param  [Hash] opts Options hash to control installation behavior.
     #
     # @example
     #  install_msi_on(hosts, 'c:\puppet.msi', {:debug => true})
@@ -267,8 +266,7 @@ module BeakerPuppetHelpers
     #                   c:\temp\foo.msi OR a url like https://download.com/foo.msi or file://c:\temp\foo.msi
     #                   can also be a collection like 'puppet', 'puppet8', 'openvox', or 'openvox8'
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    # @option opts [Boolean] :debug output the MSI installation log when set to true
-    #                 otherwise do not output log (false; default behavior)
+    # @param  [Hash] opts Options hash to control installation behavior.
     #
     # @example
     #  generic_install_msi_on(hosts, 'https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4.msi', {}, {:debug => true})
