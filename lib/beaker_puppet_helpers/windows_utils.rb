@@ -88,7 +88,6 @@ module BeakerPuppetHelpers
     # @param [String] msi_path The path of the MSI - can be a local Windows style file path like
     #                   C:\Windows\Temp\puppet-agent.msi OR a url like https://download.com/puppet.msi or file://C:\Windows\Temp\puppet-agent.msi
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #                   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
     # @param [String] log_path The path to write the MSI log - must be a local Windows style file path
     #
     # @api private
@@ -116,7 +115,6 @@ module BeakerPuppetHelpers
     #   style file path like c:\temp\puppet.msi OR a url like
     #   https://download.com/puppet.msi or file://c:\temp\puppet.msi
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
     #
     # @api private
     # @return [String, String] path to the batch file, patch to the log file
@@ -146,7 +144,6 @@ module BeakerPuppetHelpers
     #                   c:\temp\puppet.msi OR a url like https://download.com/puppet.msi or file://c:\temp\puppet.msi
     #                   can also be a collection like 'puppet', 'puppet8', 'openvox', or 'openvox8'
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #                   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
     # @option msi_opts [String] INSTALLDIR Where Puppet and its dependencies should be installed.
     #                  (Defaults vary based on operating system and installer architecture)
     #                  Requires Puppet 2.7.12 / PE 2.5.0
