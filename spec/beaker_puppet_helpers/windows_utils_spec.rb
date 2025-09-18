@@ -181,7 +181,7 @@ describe BeakerPuppetHelpers::WindowsUtils do
       allow(Net::HTTP).to receive(:get_response).and_return(
         instance_double(Net::HTTPOK, is_a?: true, body: empty_html),
       )
-      expect { dsl.get_agent_package_url('openvox8') }.to raise_error(SystemExit)
+      expect { dsl.get_agent_package_url('openvox8') }.to raise_error('No MSI files found at https://downloads.voxpupuli.org/windows/openvox8/')
     end
   end
 

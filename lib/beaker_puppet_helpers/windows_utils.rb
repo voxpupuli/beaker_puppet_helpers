@@ -68,10 +68,7 @@ module BeakerPuppetHelpers
       # Extract all hrefs that look like the appropriate MSI files
       files = doc.css('a').filter_map { |a| a['href'] }.grep(agent_regex)
 
-      if files.empty?
-        puts 'No MSI files found'
-        exit 1
-      end
+      raise "No MSI files found at #{windows_package_url}" if files.empty?
 
       latest_msi = files.max_by do |file|
         version_str = file.match(agent_regex)[1]
