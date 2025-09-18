@@ -138,7 +138,7 @@ module BeakerPuppetHelpers
       [batch_path, log_path]
     end
 
-    # Given hosts construct a PATH that includes puppetbindir, facterbindir and hierabindir
+    # Installs a specified MSI package on given hosts.
     # @param [Host, Array<Host>, String, Symbol] hosts    One or more hosts to act upon,
     #                            or a role (String or Symbol) that identifies one or more hosts.
     # @param [String] msi_path
@@ -146,9 +146,9 @@ module BeakerPuppetHelpers
     #                   c:\temp\puppet.msi OR a url like https://download.com/puppet.msi or file://c:\temp\puppet.msi
     #                   can also be a collection like 'puppet', 'puppet8', 'openvox', or 'openvox8'
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #                   See https://docs.puppetlabs.com/guides/install_puppet/install_windows.html#msi-properties
-    # @option msi_opts [String] INSTALLIDIR Where Puppet and its dependencies should be installed.
-    #                  (Defaults vary based on operating system and intaller architecture)
+    #                   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
+    # @option msi_opts [String] INSTALLDIR Where Puppet and its dependencies should be installed.
+    #                  (Defaults vary based on operating system and installer architecture)
     #                  Requires Puppet 2.7.12 / PE 2.5.0
     # @option msi_opts [String] PUPPET_MASTER_SERVER The hostname where the puppet master server can be reached.
     #                  (Defaults to puppet)
@@ -177,7 +177,7 @@ module BeakerPuppetHelpers
     # @param  [Hash] opts Options hash to control installation behavior.
     #
     # @example
-    #  install_msi_on(hosts, 'c:\puppet.msi', {:debug => true})
+    #  install_msi_on(hosts, 'c:\\puppet.msi', msi_opts: {'PUPPET_AGENT_STARTUP_MODE' => 'Manual'}, opts: {:debug => true})
     #
     # @api private
     def install_msi_on(hosts, msi_path, msi_opts: {}, opts: {})
@@ -269,7 +269,7 @@ module BeakerPuppetHelpers
     # @param  [Hash] opts Options hash to control installation behavior.
     #
     # @example
-    #  generic_install_msi_on(hosts, 'https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4.msi', {}, {:debug => true})
+    #  generic_install_msi_on(hosts, 'https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4.msi', msi_opts: {}, opts: {:debug => true})
     #
     # @api private
     def generic_install_msi_on(hosts, msi_path, msi_opts: {}, opts: {})
