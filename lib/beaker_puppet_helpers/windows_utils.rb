@@ -88,7 +88,7 @@ module BeakerPuppetHelpers
     # @param [String] msi_path The path of the MSI - can be a local Windows style file path like
     #                   C:\Windows\Temp\puppet-agent.msi OR a url like https://download.com/puppet.msi or file://C:\Windows\Temp\puppet-agent.msi
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #                   See https://docs.puppetlabs.com/guides/install_puppet/install_windows.html#msi-properties
+    #                   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
     # @param [String] log_path The path to write the MSI log - must be a local Windows style file path
     #
     # @api private
@@ -116,7 +116,7 @@ module BeakerPuppetHelpers
     #   style file path like c:\temp\puppet.msi OR a url like
     #   https://download.com/puppet.msi or file://c:\temp\puppet.msi
     # @param  [Hash{String=>String}] msi_opts MSI installer options
-    #   See https://docs.puppetlabs.com/guides/install_puppet/install_windows.html#msi-properties
+    #   See https://help.puppet.com/core//current/Content/PuppetCore/msi_properties.htm
     #
     # @api private
     # @return [String, String] path to the batch file, patch to the log file
