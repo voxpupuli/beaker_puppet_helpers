@@ -84,36 +84,6 @@ module BeakerPuppetHelpers
       "#{windows_package_repo}#{latest_msi}"
     end
 
-    # Download the appropriate puppet version based on the collection to a specified file location
-    # @param [Host, Array<Host>, String, Symbol] hosts    One or more hosts to act upon,
-    #                            or a role (String or Symbol) that identifies one or more hosts.
-    #
-    # @param [String]
-    #   The collection to install. The default (openvox) is the latest
-    #   available version. Can also be openvox8, puppet8 and others.
-    #
-    # @param [String] download_path The file location to write the downloaded msi to
-    #
-    # @return [String] The file location of the newly downloaded msi
-    def download_agent_msi_on(hosts, collection = 'openvox', download_path = 'C:\Windows\Temp\puppet-agent.msi')
-      # Get the url for the appropriate msi file
-      msi_url = get_agent_package_url(collection)
-      url = URI.parse(msi_url)
-      Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https') do |http|
-        resp = http.get(url.path)
-        raise "Failed to download #{msi_url}: #{resp.code} #{resp.message}" unless resp.is_a?(Net::HTTPSuccess)
-
-        # Download the msi file and then scp it to each host specified
-        Tempfile.open(batch_name) do |tmp_file|
-          File.open(tmp_file.path, 'w') { |file| file.puts(resp.body) }
-          block_on hosts do |host|
-            host.do_scp_to(tmp_file.path, download_path, {})
-          end
-        end
-        download_path
-      end
-    end
-
     # Generates commands to be inserted into a Windows batch file to launch an MSI install
     # @param [String] msi_path The path of the MSI - can be a local Windows style file path like
     #                   C:\Windows\Temp\puppet-agent.msi OR a url like https://download.com/puppet.msi or file://C:\Windows\Temp\puppet-agent.msi
