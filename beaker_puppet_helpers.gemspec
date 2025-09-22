@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = 'For use for the Beaker acceptance testing tool'
   s.license     = 'Apache-2.0'
 
-  s.required_ruby_version = '>= 3.2', '< 4'
+  s.required_ruby_version = '>= 3.2'
 
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
