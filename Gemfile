@@ -4,7 +4,6 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 gemspec
 
-gem 'nokogiri', require: false
 gem 'open-uri', require: false
 gem 'rake', '~> 13.0', groups: %i[development test release]
 
