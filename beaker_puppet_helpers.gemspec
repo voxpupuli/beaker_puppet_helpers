@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   # Run time dependencies
   s.add_dependency 'beaker', '>= 5.8.1', '< 8'
   s.add_dependency 'nokogiri', '~> 1.18', '>= 1.18.10'
+  s.add_dependency 'open-uri', '< 0.6'
   s.add_dependency 'puppet-modulebuilder', '>= 0.3', '< 3'
 
   s.add_development_dependency 'voxpupuli-rubocop', '~> 4.1.0'
