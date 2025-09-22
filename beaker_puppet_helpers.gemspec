@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'beaker_puppet_helpers'
-  s.version     = '3.1.0'
+  s.version     = '3.1.1'
   s.authors     = ['Vox Pupuli']
   s.email       = ['voxpupuli@groups.io']
   s.homepage    = 'https://github.com/voxpupuli/beaker_puppet_helpers'
