@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.1.1) (2025-09-22)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.1.0...3.1.1)
+
+**Fixed bugs:**
+
+- open-uri: Move from development to runtime dependency [\#83](https://github.com/voxpupuli/beaker_puppet_helpers/pull/83) ([bastelfreak](https://github.com/bastelfreak))
+- nokogiri: Move from dev to runtime dependency [\#82](https://github.com/voxpupuli/beaker_puppet_helpers/pull/82) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [3.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.1.0) (2025-09-22)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.0.0...3.1.0)
