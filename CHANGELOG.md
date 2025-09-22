@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.1.0) (2025-09-22)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.0.0...3.1.0)
+
+**Implemented enhancements:**
+
+- \(\#77\) Add support for installing openvox on windows [\#78](https://github.com/voxpupuli/beaker_puppet_helpers/pull/78) ([michael-riddle](https://github.com/michael-riddle))
+
+**Fixed bugs:**
+
+- gemspec: Dont set upper limit for ruby version [\#80](https://github.com/voxpupuli/beaker_puppet_helpers/pull/80) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [3.0.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.0.0) (2025-08-07)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/2.3.0...3.0.0)
