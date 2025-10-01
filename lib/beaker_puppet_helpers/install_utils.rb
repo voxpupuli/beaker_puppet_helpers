@@ -52,6 +52,8 @@ module BeakerPuppetHelpers
     #
     def self.install_puppet_release_repo_on(host, collection = 'puppet')
       implementation = implementation_from_collection(collection)
+      raise ArgumentError, "Unknown implementation '#{implementation}' for collection '#{collection}'. Valid implementations: #{REPOS.keys.map(&:to_s).join(', ')}" unless REPOS.key?(implementation.to_sym)
+
       repos = REPOS[implementation.to_sym][:release]
 
       variant, version, _arch = host['packaging_platform'].split('-', 3)
