@@ -55,6 +55,12 @@ environment, you can use `BEAKER_HOSTS`, passing a file path to a beaker hosts
 file or a beaker-hostgenerator value. You can also specify the tests that get
 executed with the `TESTS` environment variable.
 
+Use the `BEAKER_destroy` environment variable to control whether to cleanup
+temporary manifest files created during `apply_manifest_on` calls. Set it to
+`never` to preserve files for debugging, `onpass` to keep files only when tests
+fail, or `onfail` to keep files only when tests pass. The default (`always`)
+deletes files after every run.
+
 ## License
 
 This gem is licensed under the Apache-2 license.
@@ -62,6 +68,7 @@ This gem is licensed under the Apache-2 license.
 ## Release information
 
 To make a new release, please do:
+
 * update the version in `beaker_puppet_helpers.gemspec`
 * Install gems with `bundle install --with release --path .vendor`
 * generate the changelog with `bundle exec rake changelog`
