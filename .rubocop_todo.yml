@@ -6,12 +6,12 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 21
+# Offense count: 27
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
   Max: 9
 
-# Offense count: 97
+# Offense count: 125
 # Configuration parameters: .
 # SupportedStyles: have_received, receive
 RSpec/MessageSpies:
