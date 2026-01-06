@@ -174,6 +174,81 @@ describe BeakerPuppetHelpers::DSL do
 
       dsl.apply_manifest_on(agent, 'class { "boo": }', show_diff: true)
     end
+
+    context 'with BEAKER_destroy environment variable' do
+      after do
+        ENV.delete('BEAKER_destroy')
+      end
+
+      it 'always deletes manifest file by default (always)' do
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+        expect(agent).to receive(:rm_rf)
+
+        dsl.apply_manifest_on(agent, 'class { "boo": }')
+      end
+
+      it 'never deletes manifest file when BEAKER_destroy=never' do
+        ENV['BEAKER_destroy'] = 'never'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+        expect(agent).not_to receive(:rm_rf)
+
+        dsl.apply_manifest_on(agent, 'class { "boo": }')
+      end
+
+      it 'always deletes manifest file when BEAKER_destroy=always' do
+        ENV['BEAKER_destroy'] = 'always'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+        expect(agent).to receive(:rm_rf)
+
+        dsl.apply_manifest_on(agent, 'class { "boo": }')
+      end
+
+      it 'deletes manifest file on success when BEAKER_destroy=onpass' do
+        ENV['BEAKER_destroy'] = 'onpass'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+        expect(agent).to receive(:rm_rf)
+
+        dsl.apply_manifest_on(agent, 'class { "boo": }')
+      end
+
+      it 'preserves manifest file on failure when BEAKER_destroy=onpass' do
+        ENV['BEAKER_destroy'] = 'onpass'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0]).and_raise(StandardError, 'test failure')
+        expect(agent).not_to receive(:rm_rf)
+
+        expect { dsl.apply_manifest_on(agent, 'class { "boo": }') }.to raise_error(StandardError, 'test failure')
+      end
+
+      it 'deletes manifest file on failure when BEAKER_destroy=onfail' do
+        ENV['BEAKER_destroy'] = 'onfail'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0]).and_raise(StandardError, 'test failure')
+        expect(agent).to receive(:rm_rf)
+
+        expect { dsl.apply_manifest_on(agent, 'class { "boo": }') }.to raise_error(StandardError, 'test failure')
+      end
+
+      it 'preserves manifest file on success when BEAKER_destroy=onfail' do
+        ENV['BEAKER_destroy'] = 'onfail'
+        expect(dsl).to receive(:create_remote_file).and_return(true)
+        expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+        expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0])
+        expect(agent).not_to receive(:rm_rf)
+
+        dsl.apply_manifest_on(agent, 'class { "boo": }')
+      end
+    end
   end
 
   describe '#apply_manifest' do
