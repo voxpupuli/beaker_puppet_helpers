@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.2.0) (2026-01-06)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.1.1...3.2.0)
+
+**Implemented enhancements:**
+
+- Add Ruby 4.0 support [\#96](https://github.com/voxpupuli/beaker_puppet_helpers/pull/96) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Respect `BEAKER_destroy` for manifest cleanup [\#93](https://github.com/voxpupuli/beaker_puppet_helpers/pull/93) ([bwitt](https://github.com/bwitt))
+
 ## [3.1.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.1.1) (2025-09-22)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.1.0...3.1.1)
