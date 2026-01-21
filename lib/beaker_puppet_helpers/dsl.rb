@@ -175,13 +175,12 @@ module BeakerPuppetHelpers
 
         file_path = host.tmpfile(%(apply_manifest_#{Time.now.strftime('%H%M%S%L')}), '.pp')
         begin
+          cleanup = false
           create_remote_file(host, file_path, "#{manifest}\n")
 
-          on(host, Beaker::PuppetCommand.new('apply', file_path, puppet_apply_opts), **on_options, &block)
-          success = true
-        rescue StandardError
-          success = false
-          raise
+          result = on(host, Beaker::PuppetCommand.new('apply', file_path, puppet_apply_opts), **on_options, &block)
+          cleanup = true
+          result
         ensure
           # Respect BEAKER_destroy environment variable for file cleanup
           beaker_destroy = ENV.fetch('BEAKER_destroy', 'always').downcase
@@ -189,9 +188,9 @@ module BeakerPuppetHelpers
                           when 'no', 'never'
                             false
                           when 'onpass'
-                            success
+                            cleanup
                           when 'onfail'
-                            !success
+                            !cleanup
                           else
                             true
                           end
