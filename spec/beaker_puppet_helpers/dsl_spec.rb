@@ -175,6 +175,25 @@ describe BeakerPuppetHelpers::DSL do
       dsl.apply_manifest_on(agent, 'class { "boo": }', show_diff: true)
     end
 
+    it 'returns the result of the on call on success' do
+      expected_result = instance_double(Beaker::Result)
+      expect(dsl).to receive(:create_remote_file).and_return(true)
+      expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+      expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0]).and_return(expected_result)
+
+      result = dsl.apply_manifest_on(agent, 'class { "boo": }')
+      expect(result).to eq(expected_result)
+    end
+
+    it 'returns the result of the on call even when exceptions are raised' do
+      expect(dsl).to receive(:create_remote_file).and_return(true)
+      expect(Beaker::PuppetCommand).to receive(:new).and_return('puppet_command')
+      expect(dsl).to receive(:on).with(agent, 'puppet_command', acceptable_exit_codes: [0]).and_raise(StandardError, 'apply failed')
+      expect(agent).to receive(:rm_rf)
+
+      expect { dsl.apply_manifest_on(agent, 'class { "boo": }') }.to raise_error(StandardError, 'apply failed')
+    end
+
     context 'with BEAKER_destroy environment variable' do
       after do
         ENV.delete('BEAKER_destroy')
