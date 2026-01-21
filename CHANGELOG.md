@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.2.1) (2026-01-21)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.2.0...3.2.1)
+
+**Closed issues:**
+
+- apply\_manifest\_on no longer returns the output of the command [\#99](https://github.com/voxpupuli/beaker_puppet_helpers/issues/99)
+
+**Merged pull requests:**
+
+- Restore behavior of apply\_manifest\_on [\#100](https://github.com/voxpupuli/beaker_puppet_helpers/pull/100) ([jaevans](https://github.com/jaevans))
+
 ## [3.2.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.2.0) (2026-01-06)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.1.1...3.2.0)
