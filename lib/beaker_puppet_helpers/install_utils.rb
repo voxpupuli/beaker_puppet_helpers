@@ -172,5 +172,83 @@ module BeakerPuppetHelpers
         host.rm_rf(target)
       end
     end
+
+    # Build the openvox-agent package filename for a given host and version.
+    #
+    # The host's +packaging_platform+ attribute must follow the Beaker
+    # convention: "<variant>-<release>-<arch>", e.g.:
+    #   "el-8-x86_64", "el-9-aarch64", "el-10-x86_64"
+    #   "fedora-42-x86_64"
+    #   "sles-15-x86_64", "sles-16-aarch64"
+    #   "amazon-2-aarch64", "amazon-2023-x86_64"
+    #   "ubuntu-22.04-amd64", "ubuntu-24.04-arm64"
+    #   "debian-11-amd64", "debian-12-arm64"
+    #
+    # @param [Beaker::Host] host     The target host
+    # @param [String]       version  The openvox-agent version, e.g. '8.25.0'
+    # @return [String] the package filename (not a full URL)
+    # @raise [ArgumentError] if the variant is unsupported
+    # @api private
+    def self.openvox_agent_staging_package_filename(host, version)
+      variant, release, arch = host['packaging_platform'].split('-', 3)
+
+      case variant
+      when 'el'
+        "openvox-agent-#{version}-1.el#{release}.#{arch}.rpm"
+      when 'fedora'
+        "openvox-agent-#{version}-1.fc#{release}.#{arch}.rpm"
+      when 'sles'
+        "openvox-agent-#{version}-1.sles#{release}.#{arch}.rpm"
+      when 'amazon'
+        "openvox-agent-#{version}-1.amazon#{release}.#{arch}.rpm"
+      when 'debian', 'ubuntu'
+        "openvox-agent_#{version}-1+#{variant}#{release}_#{arch}.deb"
+      else
+        raise ArgumentError,
+              "No openvox-agent package filename known for variant '#{variant}' " \
+              "(packaging_platform: '#{host['packaging_platform']}'). " \
+              'Supported variants: el, fedora, sles, amazon, debian, ubuntu'
+      end
+    end
+
+    # Install the openvox-agent package on a host by downloading it directly
+    # from an artifact server.
+    #
+    # The correct package filename is derived from the host's +packaging_platform+
+    # attribute (see {.openvox_agent_staging_package_filename} for the expected format).
+    #
+    # @example
+    #   InstallUtils.install_openvox_agent_from_url_on(
+    #     host,
+    #     'https://artifacts.voxpupuli.org/openvox-agent',
+    #     '8.25.0'
+    #   )
+    #
+    # @param [Beaker::Host] host     The host on which to install the package
+    # @param [String] base_url       Base URL of the artifact server, without
+    #                                trailing slash, e.g.
+    #                                'https://artifacts.voxpupuli.org/openvox-agent'
+    # @param [String] version        The agent version to install, e.g. '8.25.0'
+    # @raise [ArgumentError] if the host's packaging_platform variant is unsupported
+    def self.install_openvox_agent_from_url_on(host, base_url, version)
+      filename = openvox_agent_staging_package_filename(host, version)
+      url = "#{base_url}/#{version}/#{filename}"
+      variant = host['packaging_platform'].split('-', 3).first
+
+      case variant
+      when 'el', 'fedora', 'sles', 'amazon'
+        # RPM: install_package accepts a URL directly (calls rpm/yum/zypper)
+        host.install_package(url)
+      when 'debian', 'ubuntu'
+        # Deb: must be downloaded to a local path first, then installed
+        wget_on(host, url) do |filename|
+          host.install_package(filename)
+        end
+      else
+        raise ArgumentError,
+              "No install strategy for variant '#{variant}' " \
+              "(packaging_platform: '#{host['packaging_platform']}')"
+      end
+    end
   end
 end
