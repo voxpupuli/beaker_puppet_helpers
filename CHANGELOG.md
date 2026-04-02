@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.3.1) (2026-04-02)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.3.0...3.3.1)
+
+**Fixed bugs:**
+
+- gemspec: remove allowed\_push\_host [\#106](https://github.com/voxpupuli/beaker_puppet_helpers/pull/106) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [3.3.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.3.0) (2026-04-02)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.2.1...3.3.0)
