@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.metadata = {
-    'allowed_push_host' => 'https://rubygems.org',
     'source_code_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers',
     'changelog_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers/blob/main/CHANGELOG.md',
     'bug_tracker_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers/issues',
