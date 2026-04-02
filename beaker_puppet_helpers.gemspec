@@ -15,6 +15,14 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
 
+  s.metadata = {
+    'allowed_push_host' => 'https://rubygems.org',
+    'source_code_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers',
+    'changelog_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers/blob/main/CHANGELOG.md',
+    'bug_tracker_uri' => 'https://github.com/voxpupuli/beaker_puppet_helpers/issues',
+    'rubygems_mfa_required' => 'true',
+  }
+
   # Run time dependencies
   s.add_dependency 'beaker', '>= 5.8.1', '< 8'
   s.add_dependency 'nokogiri', '~> 1.18', '>= 1.18.10'
