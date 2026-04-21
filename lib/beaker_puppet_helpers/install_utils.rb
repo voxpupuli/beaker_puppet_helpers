@@ -83,6 +83,9 @@ module BeakerPuppetHelpers
 
         # On Debian we can't count on /etc/profile.d
         host.add_env_var('PATH', '/opt/puppetlabs/bin')
+      when 'windows'
+        # TODO: native powershell is the desired goal
+        host.exec(Beaker::Command.new('powershell -Command "Invoke-WebRequest -Uri \"https://downloads.voxpupuli.org/windows/openvox8/openvox-agent-8.23.1-x64.msi\" -OutFile \"$env:TEMP\openvox.msi\"; Start-Process msiexec -ArgumentList \"/qn /norestart /i `"$env:TEMP\openvox.msi\" -Wait"'))
       else
         raise "No repository installation step for #{variant} yet..."
       end
