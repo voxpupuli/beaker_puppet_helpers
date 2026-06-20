@@ -56,5 +56,24 @@ module BeakerPuppetHelpers
         File.unlink(source_path) if source_path
       end
     end
+
+    # Copies all local dependencies into a SUT via rsync+ssh
+    #
+    # install_local_module_on creates an archive, scps it and then unpack it.
+    # That takes up a lot of time when you've many modules. rsync+ssh is a faster alternative,
+    # but it requires rsync in the SUT and on the Host.
+    # Use the spec_prep rake task to deploy the dependencies locally.
+    #
+    # @param [Beaker::Host, Array<Beaker::Host>, String, Symbol] hosts
+    #   One or more hosts to act upon, or a role (String or Symbol) that
+    #   identifies one or more hosts.
+    # @param [String] source
+    #   The directory where the modules sit
+    # @param [String] destination
+    #   The directory where the modules will be placed
+    def install_puppet_modules_via_rsync(hosts, source = 'spec/fixtures/modules/', destination = '/etc/puppetlabs/code/environments/production/modules')
+      real_source = File.realpath(source)
+      rsync_to(hosts, real_source, destination)
+    end
   end
 end
