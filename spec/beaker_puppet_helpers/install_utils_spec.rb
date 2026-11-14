@@ -67,4 +67,60 @@ describe BeakerPuppetHelpers::InstallUtils do
       end
     end
   end
+
+  describe '.install_openvox_agent_dmg_on' do
+    subject(:install_openvox_agent_dmg_on) { described_class.install_openvox_agent_dmg_on(host, 'openvox9') }
+
+    let(:host) { instance_double(Mac::Host) }
+    let(:url) { 'https://downloads.voxpupuli.org/mac/openvox9/' }
+    let(:files) do
+      %w[
+        openbolt-9.0.0-1.macos.all.arm64.dmg
+        openvox-agent-9.0.0~rc1-1.macos.all.arm64.dmg
+        openvox-agent-9.2.1-1.macos.all.arm64.dmg
+        openvox-agent-9.9.0-1.macos.all.arm64.dmg
+        openvox-agent-9.9.0-2.macos.all.arm64.dmg
+        openvox-agent-9.9.0-1.macos.all.x86_64.dmg
+        openvox-agent-9.10.0-1.macos.all.x86_64.dmg
+      ]
+    end
+    let(:index_html) { "<html><body>#{files.map { |file| %(<a href="#{file}">#{file}</a>) }.join}</body></html>" }
+
+    before do
+      allow(host).to receive(:[]).with('platform').and_return(Beaker::Platform.new(platform))
+      allow(Net::HTTP).to receive(:get_response).with(URI.parse(url))
+                                                .and_return(instance_double(Net::HTTPOK, is_a?: true, body: index_html))
+    end
+
+    context 'with an arm64 host' do
+      let(:platform) { 'osx-15-arm64' }
+
+      it 'installs the newest release and build for its architecture' do
+        expect(host).to receive(:generic_install_dmg).with("#{url}openvox-agent-9.9.0-2.macos.all.arm64.dmg",
+                                                           'openvox-agent-9.9.0', 'openvox-agent-9.9.0-2-installer.pkg')
+
+        install_openvox_agent_dmg_on
+      end
+    end
+
+    context 'with an x86_64 host' do
+      let(:platform) { 'osx-26-x86_64' }
+
+      it 'compares versions by number' do
+        expect(host).to receive(:generic_install_dmg).with("#{url}openvox-agent-9.10.0-1.macos.all.x86_64.dmg",
+                                                           'openvox-agent-9.10.0', 'openvox-agent-9.10.0-1-installer.pkg')
+
+        install_openvox_agent_dmg_on
+      end
+    end
+
+    context 'when the collection has no DMG for the architecture' do
+      let(:platform) { 'osx-15-arm64' }
+      let(:files) { %w[openvox-agent-9.9.0-1.macos.all.x86_64.dmg] }
+
+      it 'raises' do
+        expect { install_openvox_agent_dmg_on }.to raise_error(RuntimeError, "No openvox-agent DMG for arm64 found at #{url}")
+      end
+    end
+  end
 end

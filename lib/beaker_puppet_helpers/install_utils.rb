@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'beaker/command'
+require 'net/http'
+require 'nokogiri'
 
 module BeakerPuppetHelpers
   # Methods to install Puppet
@@ -249,6 +251,31 @@ module BeakerPuppetHelpers
               "No install strategy for variant '#{variant}' " \
               "(packaging_platform: '#{host['packaging_platform']}')"
       end
+    end
+
+    # Install the newest openvox-agent release of a collection on a macOS
+    # host. The collection has one DMG per architecture for every macOS
+    # version.
+    #
+    # @example
+    #   InstallUtils.install_openvox_agent_dmg_on(host, 'openvox9')
+    #
+    # @param [Beaker::Host] host    The macOS host on which to install the agent
+    # @param [String] collection    The collection, e.g. 'openvox9'
+    # @raise [RuntimeError] if the collection has no DMG for the host's architecture
+    def self.install_openvox_agent_dmg_on(host, collection)
+      url = "https://downloads.voxpupuli.org/mac/#{collection}/"
+      response = Net::HTTP.get_response(URI.parse(url))
+      raise "Failed to fetch URL: #{response.code} #{response.message}" unless response.is_a?(Net::HTTPSuccess)
+
+      arch = host['platform'].arch
+      dmg_regex = /\Aopenvox-agent-(\d+\.\d+\.\d+)-(\d+)\.macos\.all\.#{arch}\.dmg\z/
+      dmgs = Nokogiri::HTML(response.body).css('a').filter_map { |a| a['href'] }.grep(dmg_regex)
+      raise "No openvox-agent DMG for #{arch} found at #{url}" if dmgs.empty?
+
+      dmg = dmgs.max_by { |file| Gem::Version.new(file.match(dmg_regex).captures.join('.')) }
+      version, release = dmg.match(dmg_regex).captures
+      host.generic_install_dmg("#{url}#{dmg}", "openvox-agent-#{version}", "openvox-agent-#{version}-#{release}-installer.pkg")
     end
   end
 end
