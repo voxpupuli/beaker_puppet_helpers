@@ -47,6 +47,7 @@ task :acceptance do
 
   args = [
     "--hosts=#{hosts}",
+    '--log-prefix=acceptance',
     "--tests=#{tests}",
     "--log-level=#{log_level}",
     "--preserve-hosts=#{preserve_hosts}",
