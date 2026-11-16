@@ -134,7 +134,7 @@ describe BeakerPuppetHelpers::InstallUtils do
         let(:platform) { 'el-10-x86_64' }
 
         it 'installs from the OpenVox yum url' do
-          expect(host).to receive(:install_package).with('https://yum.voxpupuli.org//openvox9-release-el-10.noarch.rpm')
+          expect(host).to receive(:install_package).with('https://yum.voxpupuli.org/openvox9-release-el-10.noarch.rpm')
 
           install_puppet_release_repo_on
         end
@@ -148,7 +148,7 @@ describe BeakerPuppetHelpers::InstallUtils do
           let(:platform) { platform_name }
 
           it "installs #{package_file}, runs apt-get update and adds /opt/puppetlabs/bin to PATH" do
-            expect(described_class).to receive(:wget_on).with(host, "https://apt.voxpupuli.org//#{package_file}").and_yield('filename.deb')
+            expect(described_class).to receive(:wget_on).with(host, "https://apt.voxpupuli.org/#{package_file}").and_yield('filename.deb')
             expect(host).to receive(:install_package).with('filename.deb')
             expect(Beaker::Command).to receive(:new).with('apt-get update').and_return('apt-get update')
             expect(host).to receive(:exec).with('apt-get update')

@@ -9,8 +9,8 @@ module BeakerPuppetHelpers
     REPOS = {
       openvox: {
         release: {
-          apt: 'https://apt.voxpupuli.org/',
-          yum: 'https://yum.voxpupuli.org/',
+          apt: 'https://apt.voxpupuli.org',
+          yum: 'https://yum.voxpupuli.org',
         },
       },
       puppet: {
