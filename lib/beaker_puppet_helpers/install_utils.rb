@@ -64,8 +64,9 @@ module BeakerPuppetHelpers
         # package. We'll have to remember to update this block when
         # we update the signing keys
         if variant == 'sles' && version >= '11'
-          %w[puppet puppet-20250406].each do |gpg_key|
-            wget_on(host, "https://yum.puppet.com/RPM-GPG-KEY-#{gpg_key}") do |filename|
+          gpg_keys = (implementation == 'openvox') ? %w[GPG-KEY-openvox.pub] : %w[RPM-GPG-KEY-puppet RPM-GPG-KEY-puppet-20250406]
+          gpg_keys.each do |gpg_key|
+            wget_on(host, "#{repos[:yum]}/#{gpg_key}") do |filename|
               host.exec(Beaker::Command.new("rpm --import '#{filename}'"))
             end
           end

@@ -142,6 +142,20 @@ describe BeakerPuppetHelpers::InstallUtils do
         end
       end
 
+      context 'with SLES 15 platform' do
+        let(:platform) { 'sles-15-x86_64' }
+
+        it 'imports the OpenVox signing key and installs from the OpenVox yum url' do
+          expect(host).to receive(:install_package).with('https://yum.voxpupuli.org/openvox9-release-sles-15.noarch.rpm')
+
+          expect(described_class).to receive(:wget_on).with(host, 'https://yum.voxpupuli.org/GPG-KEY-openvox.pub').and_yield('openvox.pub').once
+          expect(Beaker::Command).to receive(:new).with("rpm --import 'openvox.pub'").and_return("rpm --import 'openvox.pub'").once
+          expect(host).to receive(:exec).with("rpm --import 'openvox.pub'").once
+
+          install_puppet_release_repo_on
+        end
+      end
+
       {
         'debian-13-amd64' => 'openvox9-release-debian13.deb',
         'ubuntu-26.04-amd64' => 'openvox9-release-ubuntu26.04.deb',
