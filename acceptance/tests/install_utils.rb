@@ -4,14 +4,14 @@ require 'beaker_puppet_helpers'
 
 test_name '#install_puppet_release_repo_on' do
   block_on hosts, run_in_parallel: true do |host|
-    BeakerPuppetHelpers::InstallUtils.install_puppet_release_repo_on(host) if host['type'] == 'aio'
+    BeakerPuppetHelpers::InstallUtils.install_puppet_release_repo_on(host, host['collection'] || 'puppet') if host['type'] == 'aio'
   end
 end
 
 test_name 'install puppet' do
   step 'run installation' do
     block_on hosts, run_in_parallel: true do |host|
-      package_name = BeakerPuppetHelpers::InstallUtils.puppet_package_name(host, prefer_aio: host['type'] == 'aio')
+      package_name = BeakerPuppetHelpers::InstallUtils.collection2packagename(host, host['collection'] || 'puppet', prefer_aio: host['type'] == 'aio')
       host.install_package(package_name)
     end
   end
