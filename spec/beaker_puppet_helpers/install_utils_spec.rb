@@ -105,6 +105,8 @@ describe BeakerPuppetHelpers::InstallUtils do
       'sles-15-x86_64' => %w[puppet-agent puppet],
       'freebsd-14-amd64' => %w[sysutils/puppet8 sysutils/puppet8],
       'ubuntu-22.04-amd64' => %w[puppet-agent puppet],
+      'ubuntu-24.04-amd64' => %w[puppet-agent puppet-agent],
+      'ubuntu-2404-amd64' => %w[puppet-agent puppet-agent],
       'archlinux-rolling-x64' => %w[puppet puppet],
     }.each do |platform_name, (aio_package, os_package)|
       context "with #{platform_name} platform" do
