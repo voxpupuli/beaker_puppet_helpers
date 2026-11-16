@@ -34,10 +34,11 @@ desc <<~DESC
 DESC
 task :acceptance do
   hosts = {
-    aio: %w[centos9 debian11 debian12],
-    foss: %w[debian11 debian12 fedora37 fedora38],
+    'type=aio' => %w[centos9 debian12 ubuntu2404],
+    'type=aio,collection=openvox9' => %w[centos10 debian13 ubuntu2604],
+    'type=foss' => %w[debian12 debian13 fedora43 fedora44],
   }
-  default_hosts = hosts.map { |type, h| h.map { |host| "#{host}-64{type=#{type}}" }.join('-') }.join('-')
+  default_hosts = hosts.map { |settings, h| h.map { |host| "#{host}-64{#{settings}}" }.join('-') }.join('-')
   hosts = ENV['BEAKER_HOSTS'] || default_hosts
 
   tests = ENV['TESTS'] || 'acceptance/tests'
