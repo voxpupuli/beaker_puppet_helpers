@@ -9,8 +9,8 @@ module BeakerPuppetHelpers
     REPOS = {
       openvox: {
         release: {
-          apt: 'https://apt.voxpupuli.org/',
-          yum: 'https://yum.voxpupuli.org/',
+          apt: 'https://apt.voxpupuli.org',
+          yum: 'https://yum.voxpupuli.org',
         },
       },
       puppet: {
@@ -64,8 +64,9 @@ module BeakerPuppetHelpers
         # package. We'll have to remember to update this block when
         # we update the signing keys
         if variant == 'sles' && version >= '11'
-          %w[puppet puppet-20250406].each do |gpg_key|
-            wget_on(host, "https://yum.puppet.com/RPM-GPG-KEY-#{gpg_key}") do |filename|
+          gpg_keys = (implementation == 'openvox') ? %w[GPG-KEY-openvox.pub] : %w[RPM-GPG-KEY-puppet RPM-GPG-KEY-puppet-20250406]
+          gpg_keys.each do |gpg_key|
+            wget_on(host, "#{repos[:yum]}/#{gpg_key}") do |filename|
               host.exec(Beaker::Command.new("rpm --import '#{filename}'"))
             end
           end
@@ -145,7 +146,7 @@ module BeakerPuppetHelpers
         'sysutils/puppet8'
       when 'ubuntu'
         # 23.04 started to ship puppet-agent with puppet as a legacy package
-        (prefer_aio || host['packaging_platform'].split('-', 3)[1].to_i >= 2304) ? 'puppet-agent' : 'puppet'
+        (prefer_aio || host['packaging_platform'].split('-', 3)[1].delete('.').to_i >= 2304) ? 'puppet-agent' : 'puppet'
       else
         'puppet'
       end
