@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.0](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.4.0) (2026-11-17)
+
+[Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.3.1...3.4.0)
+
+**Implemented enhancements:**
+
+- Implement support for installing openvox-agent on macOS [\#115](https://github.com/voxpupuli/beaker_puppet_helpers/pull/115) ([nmburgan](https://github.com/nmburgan))
+
+**Closed issues:**
+
+- Dependency Dashboard [\#114](https://github.com/voxpupuli/beaker_puppet_helpers/issues/114)
+
+**Merged pull requests:**
+
+- Small fixes and specs [\#117](https://github.com/voxpupuli/beaker_puppet_helpers/pull/117) ([nmburgan](https://github.com/nmburgan))
+- Test installing OpenVox in the acceptance run [\#116](https://github.com/voxpupuli/beaker_puppet_helpers/pull/116) ([nmburgan](https://github.com/nmburgan))
+- Update voxpupuli-rubocop requirement from ~\> 5.1.0 to ~\> 5.2.0 [\#109](https://github.com/voxpupuli/beaker_puppet_helpers/pull/109) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [3.3.1](https://github.com/voxpupuli/beaker_puppet_helpers/tree/3.3.1) (2026-04-02)
 
 [Full Changelog](https://github.com/voxpupuli/beaker_puppet_helpers/compare/3.3.0...3.3.1)
