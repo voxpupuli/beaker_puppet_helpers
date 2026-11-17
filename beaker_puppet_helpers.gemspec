@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'open-uri', '< 0.6'
   s.add_dependency 'puppet-modulebuilder', '>= 0.3', '< 3'
 
-  s.add_development_dependency 'voxpupuli-rubocop', '~> 5.2.0'
+  s.add_development_dependency 'voxpupuli-rubocop', '~> 5.3.0'
 end
